@@ -26,10 +26,6 @@ public class Main extends Application {
 
     //REGLAGE DE LA VITESSE DE MARCHE
     private static final double VITESSE_MARCHE = 10;
-    private static final double g = 2;
-    //GESTION DU SAUT
-    private static final int TSVALUE = 23;
-    private static final double VS = 30;
     //BOOLEAN AVANCEMENT JOUEUR
     private static boolean dclick = false;
     private static boolean qclick = false;
@@ -40,7 +36,12 @@ public class Main extends Application {
     private static boolean tclick = false;
     //GESTION DE LA GRAVITE
     private static double vitesseG = 0;
+    private static final double GRAVITE = 2;
+    //GESTION DU SAUT
+    private static final int TSVALUE = 23;
+    private static final double VS = 30;
     private static int TS;
+
 
 
     //Image du personnage
@@ -95,7 +96,7 @@ public class Main extends Application {
                 //SI IL NY A PAS DE COLLISION AVEC LE PERSONNAGE ALORS ON FAIT CHUTER L'OBJET PERSONNAGE
                 if (personnage.isGravity()) {
                     personnage.setY(personnage.getY() + vitesseG);
-                    vitesseG = vitesseG + g;
+                    vitesseG = vitesseG + GRAVITE;
                 }
 
                 //SI IL Y A COLLISION AVEC UNE PLATEFORME VITESSEG REVIENT A ZERO SINON LE PERSO TOMBERA PLUS VITE A CHAQUE CHUTE
