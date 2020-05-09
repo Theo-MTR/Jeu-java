@@ -1,12 +1,4 @@
-/* A FAIRE
- * Mettre la vitesse de deplacement dans une variable constante
- *
- *
- *
- *
- * */
-
-package application;
+package jeux;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -42,8 +34,6 @@ public class Main extends Application {
     private static final double VS = 30;
     private static int TS;
 
-
-
     //Image du personnage
     private final Image perso = new Image("perso.png");
     private final Paint ip = new ImagePattern(perso);
@@ -57,30 +47,30 @@ public class Main extends Application {
         //BACKGROUND.
         //ImageView bg = new ImageView("background.jpg");
         //Affichage.configBG(bg, scene, root);
-         
+
          /*
          //test popup
-         Label label = new Label("This is a Popup"); 
-         // create a popup 
-         Popup popup = new Popup(); 
-         // set background 
-         popup.getContent().add(label); 
+         Label label = new Label("This is a Popup");
+         // create a popup
+         Popup popup = new Popup(); java --module-path D:\eclipse\eclipse\javafx-sdk-11.0.2\lib --add-modules javafx.controls,javafx.fxml,javafx.graphics,javafx.web -jar JeuxIUT.jar
+         // set background
+         popup.getContent().add(label);
          popup.setAutoHide(true);
          label.setStyle("-fx-background-color:black;");
-         label.setMinWidth(80); 
-         label.setMinHeight(50); 
+         label.setMinWidth(80);
+         label.setMinHeight(50);
          */
 
         Group root = new Group();
         Scene scene = new Scene(root, 1920, 1080, Color.WHITE);
 
         //Creation personnage
-        Rect personnage = Obstacles.createRectangle(60, 120, 150, 500, true, ip); //Ici utilisation de la methode createRectangle qui se trouve dans la class obstacles afin d'economiser des lignes (la methode renvoie un rectangle fait avec les arguments en paramètre)
+        Rect personnage = Obstacles.createRectangle(60, 120, 150, 500, true, ip); //Ici utilisation de la methode createRectangle qui se trouve dans la class obstacles afin d'economiser des lignes (la methode renvoie un rectangle fait avec les arguments en paramÃ¨tre)
         //Creation sol
-        Rectangle sol = Obstacles.createRectangle(scene.getWidth(), 50, 0, 1030, false, Color.BLACK); //Même principe
+        Rectangle sol = Obstacles.createRectangle(scene.getWidth(), 50, 0, 1030, false, Color.BLACK); //MÃªme principe
         //Creation de plateformes rectangulaires
         Rectangle plat1 = Obstacles.createRectangle(scene.getWidth() / 2, 30, 800, 800, false, Color.BLACK); //Ainsi de suite
-        Rectangle plat2 = Obstacles.createRectangle(500, 30, 0, 700, false, Color.BLACK);
+        Rectangle plat2 = Obstacles.createRectangle(500, 40, 0, 700, false, Color.BLACK);
         //Creation d'un objet sur la map
         Rectangle obj1 = Obstacles.createRectangle(50, 50, 300, sol.getY() - sol.getHeight(), false, Color.DARKRED);
 
@@ -154,7 +144,6 @@ public class Main extends Application {
                 //CONDITION POUR FAIRE SAUTER LE JOUEUR
 
                 if (jump) {
-
                     personnage.setY(personnage.getY() + vitesseG);
                     TS--;
                     if (TS <= 0) jump = false;
@@ -212,7 +201,6 @@ public class Main extends Application {
                 iclick = false;
             }
             if (ke.getText().toUpperCase().equals("J") && !jump) {
-                System.out.println(vitesseG);
                 personnage.setEtatInitial(personnage.getY());
                 personnage.setCollision(false);
                 jump = true;
@@ -221,13 +209,13 @@ public class Main extends Application {
                 vitesseG = -VS;
             }
         });
-        
+
          /*
          scene.setOnMouseClicked(new EventHandler <MouseEvent>() {
         	 public void handle(MouseEvent e) {
         		 sol.setFill(Color.ALICEBLUE);
         		 if (!popup.isShowing()) popup.show(primaryStage);
-        		 //System.out.printf("Bouton %s cliqué sur le nœud, %d click(s) %f x %f.%n", e.getButton(), e.getClickCount(), e.getX(), e.getY());
+        		 //System.out.printf("Bouton %s cliquÃ© sur le nÅ“ud, %d click(s) %f x %f.%n", e.getButton(), e.getClickCount(), e.getX(), e.getY());
         	 }
          });
          */
@@ -236,7 +224,7 @@ public class Main extends Application {
         //root.getChildren().add(bg);
         root.getChildren().addAll(sol, plat1, plat2, personnage, obj1);
 
-        //Réglages fenêtre
+        //RÃ©glages fenÃªtre
         primaryStage.setScene(scene); //Ajout de la scene
         primaryStage.setTitle("Premier jeu java");
         primaryStage.show();

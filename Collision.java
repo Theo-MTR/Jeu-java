@@ -1,4 +1,4 @@
-package application;
+package jeux;
 
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
@@ -15,18 +15,22 @@ public class Collision {
             if (checkCollision(a, s)) {
                 a.setCollision(true);
                 a.setGravity(false);
+                a.setCollisionWith(s);
                 replacer(a, s);
-            } else if ((a.getX() + a.getWidth() < s.getX() || a.getX() > s.getX() + s.getWidth()) && a.getY() + a.getHeight() <= s.getY()) a.setGravity(true);
+            }
+        }
+        if (a.getCollisionWith() != null && (a.getX() + a.getWidth() < a.getCollisionWith().getX() || a.getX() > a.getCollisionWith().getX() + a.getCollisionWith().getWidth()) && a.getY() + a.getHeight() <= a.getCollisionWith().getY()) {
+            a.setGravity(true);
+            a.setCollisionWith(null);
         }
     }
 
     public static void replacer(Rect a, Rectangle b) {
-        if (a.getY() + a.getHeight() > b.getY() + b.getHeight()) {
-            a.setY(a.getEtatInitial()); // Permet de reinitialiser l'emplacement en fonction de l'endroit de la collision
+
+        if (a.getY() + a.getHeight() <= b.getY() + b.getHeight()) {
+            a.setEtatInitial(b.getY() - a.getHeight());
         }
-        else {
-            a.setY(b.getY() - a.getHeight());
-        }
+        a.setY(a.getEtatInitial()); // Permet de reinitialiser l'emplacement en fonction de l'endroit de la collision
     }
 
 

@@ -1,12 +1,15 @@
-package application;
+package jeux;
+
 
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 
 public class Rect extends Rectangle {
 
     private boolean collision;
     private boolean gravity;
     private double etatInitial;
+    private Rectangle collisionWith;
 
     public Rect() {
         super();
@@ -37,5 +40,13 @@ public class Rect extends Rectangle {
 
     public void setEtatInitial(double etatInitial) {
         this.etatInitial = etatInitial;
+    }
+
+    public Rectangle getCollisionWith() {
+        return collisionWith;
+    }
+
+    public void setCollisionWith(Rectangle collisionWith) {
+        this.collisionWith = collisionWith;
     }
 }
