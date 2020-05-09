@@ -16,9 +16,10 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.*;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.*;
+import javafx.scene.paint.Paint;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.*;
-import javafx.stage.Popup;
+//import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 //Salut
@@ -45,8 +46,8 @@ public class Main extends Application {
 
 
     //Image du personnage
-    Image perso = new Image("perso.png");
-    Paint ip = new ImagePattern(perso);
+    private Image perso = new Image("perso.png");
+    private Paint ip = new ImagePattern(perso);
 
     public static void main(String[] args) {
         Application.launch(Main.class, args);
