@@ -1,7 +1,6 @@
 package application;
 
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
 
 public class Obstacles {
 	
