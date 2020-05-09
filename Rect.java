@@ -2,7 +2,6 @@ package jeux;
 
 
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 
 public class Rect extends Rectangle {
 
