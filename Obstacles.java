@@ -5,8 +5,8 @@ import javafx.scene.shape.Rectangle;
 
 public class Obstacles {
 	
-	public static Rectangle createRectangle(double width, double height, double x, double y, boolean traversable, Paint fill) {
-		Rectangle r = new Rectangle();
+	public static Rect createRectangle(double width, double height, double x, double y, boolean traversable, Paint fill) {
+		Rect r = new Rect();
 		r.setWidth(width);
 		r.setHeight(height);
 		r.setX(x);
