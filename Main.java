@@ -214,8 +214,7 @@ public class Main extends Application {
                 if (ke.getText().toUpperCase().equals("I")) {
                     iclick = false;
                 }
-                if (ke.getText().toUpperCase().equals("J")) {
-                    if (!jump) {
+                if (ke.getText().toUpperCase().equals("J") && !jump) {
                         System.out.println(vitesseG);
                         personnage.setEtatInitial(personnage.getY());
                         personnage.setCollision(false);
@@ -223,7 +222,6 @@ public class Main extends Application {
                         personnage.setGravity(true);
                         TS = TSVALUE;
                         vitesseG = -VS;
-                    }
                 }
             }
         });
