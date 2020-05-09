@@ -28,6 +28,10 @@ public class Main extends Application {
 
     //REGLAGE DE LA VITESSE DE MARCHE
     private static final double VITESSE_MARCHE = 10;
+    private static final double g = 2;
+    //GESTION DU SAUT
+    private static final int TSVALUE = 23;
+    private static final double VS = 30;
     //BOOLEAN AVANCEMENT JOUEUR
     private static boolean dclick = false;
     private static boolean qclick = false;
@@ -38,16 +42,12 @@ public class Main extends Application {
     private static boolean tclick = false;
     //GESTION DE LA GRAVITE
     private static double vitesseG = 0;
-    private static final double g = 2;
-    //GESTION DU SAUT
-    private static final int TSVALUE = 23;
-    private static final double VS = 30;
     private static int TS;
 
 
     //Image du personnage
-    private Image perso = new Image("perso.png");
-    private Paint ip = new ImagePattern(perso);
+    private final Image perso = new Image("perso.png");
+    private final Paint ip = new ImagePattern(perso);
 
     public static void main(String[] args) {
         Application.launch(Main.class, args);
@@ -94,16 +94,16 @@ public class Main extends Application {
                 Collision.checkCollision(personnage, obstacles);
 
                 //GESTION DE LA GRAVITE
-                    //SI IL NY A PAS DE COLLISION AVEC LE PERSONNAGE ALORS ON FAIT CHUTER L'OBJET PERSONNAGE
-                    if (personnage.isGravity()) {
-                        personnage.setY(personnage.getY() + vitesseG);
-                        vitesseG = vitesseG + g;
-                    }
+                //SI IL NY A PAS DE COLLISION AVEC LE PERSONNAGE ALORS ON FAIT CHUTER L'OBJET PERSONNAGE
+                if (personnage.isGravity()) {
+                    personnage.setY(personnage.getY() + vitesseG);
+                    vitesseG = vitesseG + g;
+                }
 
-                    //SI IL Y A COLLISION AVEC UNE PLATEFORME VITESSEG REVIENT A ZERO SINON LE PERSO TOMBERA PLUS VITE A CHAQUE CHUTE
-                    if (!personnage.isGravity()) {
-                        vitesseG = 0;
-                    }
+                //SI IL Y A COLLISION AVEC UNE PLATEFORME VITESSEG REVIENT A ZERO SINON LE PERSO TOMBERA PLUS VITE A CHAQUE CHUTE
+                if (!personnage.isGravity()) {
+                    vitesseG = 0;
+                }
 
                 //FIN DE LA GESTION DE LA GRAVITE
 
@@ -170,60 +170,56 @@ public class Main extends Application {
 
         //CONFIGURATION ETAT POUR DEPLACEMENT CERCLE AVEC LES TOUCHES ZQSD
 
-        personnage.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            public void handle(KeyEvent ke) {
+        personnage.setOnKeyPressed(ke -> {
 
-                if (ke.getText().toUpperCase().equals("D")) {
-                    dclick = true; //SI ON APPUIE SUR "D" ALORS DCLICK PASSE A TRUE
-                }
-                if (ke.getText().toUpperCase().equals("Q")) {
-                    qclick = true;
-                }
-                if (ke.getText().toUpperCase().equals("Z")) {
-                    zclick = true;
-                }
-                if (ke.getText().toUpperCase().equals("S")) {
-                    sclick = true;
-                }
-                if (ke.getText().toUpperCase().equals("I")) {
-                    iclick = true;
-                }
-                if (ke.getText().toUpperCase().equals("T") && !tclick) {
-                    tclick = true;
-                }
-                if (ke.getText().toUpperCase().equals("L") && tclick) {
-                    tclick = false;
-                }
-
+            if (ke.getText().toUpperCase().equals("D")) {
+                dclick = true; //SI ON APPUIE SUR "D" ALORS DCLICK PASSE A TRUE
             }
+            if (ke.getText().toUpperCase().equals("Q")) {
+                qclick = true;
+            }
+            if (ke.getText().toUpperCase().equals("Z")) {
+                zclick = true;
+            }
+            if (ke.getText().toUpperCase().equals("S")) {
+                sclick = true;
+            }
+            if (ke.getText().toUpperCase().equals("I")) {
+                iclick = true;
+            }
+            if (ke.getText().toUpperCase().equals("T") && !tclick) {
+                tclick = true;
+            }
+            if (ke.getText().toUpperCase().equals("L") && tclick) {
+                tclick = false;
+            }
+
         });
 
-        personnage.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            public void handle(KeyEvent ke) {
-                if (ke.getText().toUpperCase().equals("D")) {
-                    dclick = false; //SI ON RELACHE "D" ALORS DCLICK PASSE A FALSE
-                }
-                if (ke.getText().toUpperCase().equals("Q")) {
-                    qclick = false;
-                }
-                if (ke.getText().toUpperCase().equals("Z")) {
-                    zclick = false;
-                }
-                if (ke.getText().toUpperCase().equals("S")) {
-                    sclick = false;
-                }
-                if (ke.getText().toUpperCase().equals("I")) {
-                    iclick = false;
-                }
-                if (ke.getText().toUpperCase().equals("J") && !jump) {
-                        System.out.println(vitesseG);
-                        personnage.setEtatInitial(personnage.getY());
-                        personnage.setCollision(false);
-                        jump = true;
-                        personnage.setGravity(true);
-                        TS = TSVALUE;
-                        vitesseG = -VS;
-                }
+        personnage.setOnKeyReleased(ke -> {
+            if (ke.getText().toUpperCase().equals("D")) {
+                dclick = false; //SI ON RELACHE "D" ALORS DCLICK PASSE A FALSE
+            }
+            if (ke.getText().toUpperCase().equals("Q")) {
+                qclick = false;
+            }
+            if (ke.getText().toUpperCase().equals("Z")) {
+                zclick = false;
+            }
+            if (ke.getText().toUpperCase().equals("S")) {
+                sclick = false;
+            }
+            if (ke.getText().toUpperCase().equals("I")) {
+                iclick = false;
+            }
+            if (ke.getText().toUpperCase().equals("J") && !jump) {
+                System.out.println(vitesseG);
+                personnage.setEtatInitial(personnage.getY());
+                personnage.setCollision(false);
+                jump = true;
+                personnage.setGravity(true);
+                TS = TSVALUE;
+                vitesseG = -VS;
             }
         });
         
