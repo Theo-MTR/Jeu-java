@@ -31,6 +31,7 @@ public class Main extends Application {
     private static final double GRAVITE = 2;
     //GESTION DU SAUT
     private static final int TSVALUE = 23;
+    private static double vitesseS = 0;
     private static final double VS = 30;
     private static int TS;
 
@@ -65,20 +66,21 @@ public class Main extends Application {
         Scene scene = new Scene(root, 1920, 1080, Color.WHITE);
 
         //Creation personnage
-        Rect personnage = Obstacles.createRectangle(60, 120, 150, 500, true, ip); //Ici utilisation de la methode createRectangle qui se trouve dans la class obstacles afin d'economiser des lignes (la methode renvoie un rectangle fait avec les arguments en paramètre)
+        Rect personnage = Obstacles.createRectangle(60, 120, 150, 500, true, false, ip); //Ici utilisation de la methode createRectangle qui se trouve dans la class obstacles afin d'economiser des lignes (la methode renvoie un rectangle fait avec les arguments en paramètre)
         //Creation sol
-        Rectangle sol = Obstacles.createRectangle(scene.getWidth(), 50, 0, 1030, false, Color.BLACK); //Même principe
+        Rect sol = Obstacles.createRectangle(scene.getWidth(), 50, 0, 1030, false, false, Color.BLACK); //Même principe
         //Creation de plateformes rectangulaires
-        Rectangle plat1 = Obstacles.createRectangle(scene.getWidth() / 2, 30, 800, 800, false, Color.BLACK); //Ainsi de suite
-        Rectangle plat2 = Obstacles.createRectangle(500, 40, 0, 700, false, Color.BLACK);
+        Rect plat1 = Obstacles.createRectangle(scene.getWidth() / 2, 30, 800, 800, false, false, Color.BLACK); //Ainsi de suite
+        Rect plat2 = Obstacles.createRectangle(500, 40, 0, 700, false, false, Color.BLACK);
         //Creation d'un objet sur la map
-        Rectangle obj1 = Obstacles.createRectangle(50, 50, 300, sol.getY() - sol.getHeight(), false, Color.DARKRED);
+        Rect obj1 = Obstacles.createRectangle(50, 50, 300, sol.getY() - sol.getHeight(), false, true, Color.DARKRED);
 
-        Rectangle[] obstacles = {sol, plat1, plat2};
+        Rect[] obstacles = {obj1, sol, plat1, plat2};
 
         //BOUCLE DE JEU QUI S'EXECTUTE A CHAQUE FRAME
         AnimationTimer timer = new AnimationTimer() {
             public void handle(long now) {
+
 
                 Collision.checkCollision(personnage, obstacles);
 
@@ -90,9 +92,14 @@ public class Main extends Application {
                 }
 
                 //SI IL Y A COLLISION AVEC UNE PLATEFORME VITESSEG REVIENT A ZERO SINON LE PERSO TOMBERA PLUS VITE A CHAQUE CHUTE
-                if (!personnage.isGravity()) {
+                if (!personnage.isGravity() && !personnage.getCollisionWith().isMovible()) {
                     vitesseG = 0;
                 }
+
+                if (!personnage.isGravity() && personnage.getCollisionWith().isMovible() && personnage.getY() + personnage.getHeight() < personnage.getCollisionWith().getY()) {
+                    vitesseG = 0;
+                }
+
 
                 //FIN DE LA GESTION DE LA GRAVITE
 

@@ -8,7 +8,8 @@ public class Rect extends Rectangle {
     private boolean collision;
     private boolean gravity;
     private double etatInitial;
-    private Rectangle collisionWith;
+    private Rect collisionWith;
+    private boolean movible;
 
     public Rect() {
         super();
@@ -41,11 +42,19 @@ public class Rect extends Rectangle {
         this.etatInitial = etatInitial;
     }
 
-    public Rectangle getCollisionWith() {
+    public Rect getCollisionWith() {
         return collisionWith;
     }
 
-    public void setCollisionWith(Rectangle collisionWith) {
+    public void setCollisionWith(Rect collisionWith) {
         this.collisionWith = collisionWith;
+    }
+
+    public boolean isMovible() {
+        return movible;
+    }
+
+    public void setMovible(boolean movible) {
+        this.movible = movible;
     }
 }
