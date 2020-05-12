@@ -1,44 +1,33 @@
-package jeux;
-/*
-SetCollision ne sert a rien
- */
+package jeu;
+
+import javafx.animation.AnimationTimer;
 import javafx.scene.shape.Shape;
 
 public class Collision {
-
-    //Tester collision entre 2 objets uniques
-    public static boolean checkCollision(Shape a, Shape b) {
-        return Shape.intersect(a, b).getBoundsInLocal().getWidth() != -1;
-    }
-
-    public static void checkCollision(Rect a, Rect[] b) {
-        for (Rect s : b) {
-            if (checkCollision(a, s)) {
-                a.setCollision(true);
-                a.setCollisionWith(s);
-                a.setGravity(false);
-                replacer(a, s);
+    public Collision() {
+        AnimationTimer timer = new AnimationTimer() {
+            @Override
+            public void handle(long l) {
+                for (Shape s : Var.obstacles) {
+                    if (Shape.intersect(Var.personnage, s).getBoundsInLocal().getWidth() != -1) {
+                        Var.personnage.setCollisionAvec(s);
+                        Var.personnage.setEnGravite(false);
+                        replacer(s);
+                    }
+                }
+                if (Var.personnage.getCollisionAvec() != null && (Var.personnage.getX() + Var.personnage.getWidth() < Var.personnage.getCollisionAvec().getBoundsInLocal().getMinX() || Var.personnage.getX() > Var.personnage.getCollisionAvec().getBoundsInLocal().getMaxX()) && Var.personnage.getY() + Var.personnage.getHeight() <= Var.personnage.getCollisionAvec().getBoundsInLocal().getMinY()) {
+                    Var.personnage.setEnGravite(true);
+                    Var.personnage.setCollisionAvec(null);
+                }
             }
-        }
-        if (a.getCollisionWith() != null && (a.getX() + a.getWidth() < a.getCollisionWith().getX() || a.getX() > a.getCollisionWith().getX() + a.getCollisionWith().getWidth()) && a.getY() + a.getHeight() <= a.getCollisionWith().getY()) {
-            a.setGravity(true);
-            a.setCollisionWith(null);
-        }
+        };
+        timer.start();
     }
 
-    public static void replacer(Rect a, Rect b) {
-        if (!(b.isMovible())) {
-            if (a.getY() + a.getHeight() <= b.getY() + b.getHeight()) {
-                a.setEtatInitial(b.getY() - a.getHeight());
-            }
-            a.setY(a.getEtatInitial()); // Permet de reinitialiser l'emplacement en fonction de l'endroit de la collision
+    private void replacer(Shape s) {
+        if (Var.personnage.getY() + Var.personnage.getHeight() > s.getBoundsInParent().getMinY()) {
+            Var.personnage.setEtatInitial(s.getBoundsInLocal().getMinY() - Var.personnage.getHeight());
         }
-        else if (b.isMovible() && a.getY() + a.getHeight() < a.getCollisionWith().getY() - a.getCollisionWith().getHeight() && ( a.getX() + a.getWidth() >= a.getCollisionWith().getX() || a.getX() <= a.getCollisionWith().getX() + a.getCollisionWith().getWidth() )) {
-            a.setEtatInitial(b.getY() - a.getHeight() - 1);
-            a.setY(a.getEtatInitial());
-
-        }
+        Var.personnage.setY(Var.personnage.getEtatInitial());
     }
-
-
 }
