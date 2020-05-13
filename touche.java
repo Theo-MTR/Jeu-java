@@ -6,7 +6,7 @@ public class touche {
 
     private static final double VS = 30;
 
-    public static void touche() {
+    public static void toucheEv() {
 
         Var.personnage.setOnKeyPressed(ke -> {
             if (ke.getText().toUpperCase().equals("D")) {

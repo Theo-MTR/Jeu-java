@@ -22,7 +22,7 @@ public class Main extends Application {
         new Gravite();
         new Collision();
         new GestionPiege();
-        touche.touche();
+        touche.toucheEv();
 
     }
 }
