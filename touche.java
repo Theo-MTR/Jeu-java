@@ -4,7 +4,6 @@ import javafx.scene.input.KeyCode;
 
 public class touche {
 
-    private static final int TSVALUE = 23;
     private static final double VS = 30;
 
     public static void touche() {
@@ -25,11 +24,10 @@ public class touche {
             if (ke.getText().toUpperCase().equals("Q")) {
                 Var.toucheQ = false; //SI ON APPUIE SUR "D" ALORS Var.toucheD PASSE A TRUE
             }
-            if (ke.getCode() == KeyCode.SPACE) {
-                Var.toucheSaut = true;
+            if (ke.getCode() == KeyCode.SPACE && !Var.personnage.isEnGravite()) {
                 Var.personnage.setEtatInitial(Var.personnage.getY());
+                Var.toucheSaut = true;
                 Var.personnage.setEnGravite(true);
-                Var.TS = TSVALUE;
                 Var.vitesseG = -VS;
             }
         });

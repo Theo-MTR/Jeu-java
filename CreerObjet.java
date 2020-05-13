@@ -1,6 +1,7 @@
 package jeu;
 
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
@@ -29,6 +30,26 @@ public class CreerObjet {
         r.setY(y);
         r.setFill(couleur);
         return r;
+    }
+
+    public static MurMovible creerMurMovible(double longueur, double hauteur, double x, double y, Paint couleur, Bouton bouton) {
+        MurMovible r = new MurMovible(bouton, y);
+        r.setWidth(longueur);
+        r.setHeight(hauteur);
+        r.setX(x);
+        r.setY(y);
+        r.setFill(couleur);
+        return r;
+    }
+
+    public static Bouton creerBouton(double x, double y) {
+        Bouton b = new Bouton();
+        b.setWidth(50);
+        b.setHeight(20);
+        b.setX(x);
+        b.setY(y);
+        b.setFill(Color.RED);
+        return b;
     }
 
 }

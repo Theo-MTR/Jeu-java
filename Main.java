@@ -21,6 +21,7 @@ public class Main extends Application {
         new Mouvements();
         new Gravite();
         new Collision();
+        new GestionPiege();
         touche.touche();
 
     }

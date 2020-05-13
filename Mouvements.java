@@ -14,8 +14,7 @@ public class Mouvements {
                 if (Var.toucheQ) Var.personnage.setX(Var.personnage.getX() - VITESSE_MARCHE);
                 if (Var.toucheSaut) {
                     Var.personnage.setY(Var.personnage.getY() + Var.vitesseG);
-                    Var.TS--;
-                    if (Var.TS <= 0) Var.toucheSaut = false;
+                    if (Var.personnage.isEnGravite()) Var.toucheSaut = false;
                 }
             }
         };

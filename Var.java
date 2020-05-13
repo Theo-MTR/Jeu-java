@@ -18,5 +18,4 @@ public class Var {
     protected static Vector<Shape> obstacles = new Vector<>();
     //Gravite
     protected static double vitesseG = 0;
-    protected static int TS;
 }
