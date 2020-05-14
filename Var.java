@@ -5,12 +5,13 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
+import javafx.stage.Screen;
 
 import java.util.Vector;
 
 public class Var {
     protected static Group root = new Group();
-    protected static Scene scene = new Scene(root, 1920, 1080, Color.WHITE);
+    protected static Scene scene = new Scene(root, 0, 0, Color.WHITE);
     protected static Personnage personnage;
     protected static boolean toucheD = false;
     protected static boolean toucheQ = false;
