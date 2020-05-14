@@ -49,7 +49,19 @@ public class CreerObjet {
         b.setX(x);
         b.setY(y);
         b.setFill(Color.RED);
+        b.setInitialY(y);
+        b.setInitialTaille(20);
         return b;
+    }
+
+    public static Cube creerCube(double x, double y) {
+        Cube c = new Cube();
+        c.setWidth(40);
+        c.setHeight(40);
+        c.setX(x);
+        c.setY(y);
+        c.setFill(Color.GREEN);
+        return c;
     }
 
 }

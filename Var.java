@@ -14,7 +14,9 @@ public class Var {
     protected static Personnage personnage;
     protected static boolean toucheD = false;
     protected static boolean toucheQ = false;
+    protected static boolean toucheT = false;
     protected static boolean toucheSaut = false;
+    protected static Cube cubeSelect;
     protected static Vector<Shape> obstacles = new Vector<>();
     //Gravite
     protected static double vitesseG = 0;

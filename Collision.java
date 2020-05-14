@@ -16,10 +16,10 @@ public class Collision {
                         //gestion des boutons
                         if (s instanceof Bouton && !((Bouton) s).isOn()) {
                             ((Bouton) s).setOn(true);
-                            animBouton((Bouton) s);
+                            Animation.animBouton((Bouton) s);
                         }
                         //Gestion des chutes
-                        else if (!(s instanceof Bouton)) {
+                        if (!(s instanceof Bouton)) {
                             Var.personnage.setEnGravite(false);
                         }
                         Var.personnage.setCollisionAvec(s);
@@ -27,29 +27,32 @@ public class Collision {
                     }
                 }
 
-                //Faire tomber le personnage lorsqu'il quitte une plateforme
-                if (Var.personnage.getCollisionAvec() != null && (Var.personnage.getX() + Var.personnage.getWidth() < Var.personnage.getCollisionAvec().getBoundsInLocal().getMinX() || Var.personnage.getX() > Var.personnage.getCollisionAvec().getBoundsInLocal().getMaxX()) && Var.personnage.getY() + Var.personnage.getHeight() <= Var.personnage.getCollisionAvec().getBoundsInLocal().getMinY()) {
-                    if (Var.personnage.getCollisionAvec() instanceof Bouton) {
-                        ((Bouton) Var.personnage.getCollisionAvec()).setOn(false);
-                        animBouton((Bouton)Var.personnage.getCollisionAvec());
-                    }
-                    Var.personnage.setEnGravite(true);
-                    Var.personnage.setCollisionAvec(null);
-                }
             }
         };
         timer.start();
     }
 
     private void replacer(Shape s) {
-        if (Var.personnage.getY() + Var.personnage.getHeight() <= s.getBoundsInParent().getMaxY()) {
+        //Replacer le personnage en fonction de s'il est au dessus ou au dessous d'une plateforme
+        if (!(s instanceof Cube) && Var.personnage.getY() <= s.getBoundsInParent().getMinY() ) {
+            Var.personnage.setEtatInitial(s.getBoundsInLocal().getMinY() - Var.personnage.getHeight());
+        }
+        //Replacer personnage quand il arrive sur un cube
+        else if ((s instanceof Cube) && Var.personnage.getY() + Var.personnage.getHeight() >= s.getBoundsInLocal().getMinY() && Var.personnage.getY() + Var.personnage.getHeight() < s.getBoundsInLocal().getMaxY()) {
             Var.personnage.setEtatInitial(s.getBoundsInLocal().getMinY() - Var.personnage.getHeight());
         }
         Var.personnage.setY(Var.personnage.getEtatInitial());
-    }
+        //Replacer personnage si il arrive a droite ou a gauche d'un mur et l'empecher d'avancer
+        if (s instanceof MurMovible) {
+            if (Var.personnage.getX() + Var.personnage.getWidth() >= s.getBoundsInParent().getMinX()) {
+                Var.toucheD = false;
+                Var.personnage.setX(Var.personnage.getX() - 10);
+            }
+            else if (Var.personnage.getX() >= s.getBoundsInParent().getMaxX()) {
+                Var.toucheQ = false;
+                Var.personnage.setX(Var.personnage.getX() + 10);
+            }
 
-    private void animBouton(Bouton s) {
-        if (s.isOn()) s.setY(s.getY() + s.getHeight() / 2);
-        else s.setY(s.getY() - s.getHeight() / 2);
+        }
     }
 }

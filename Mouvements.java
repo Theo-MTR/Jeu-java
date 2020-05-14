@@ -16,6 +16,17 @@ public class Mouvements {
                     Var.personnage.setY(Var.personnage.getY() + Var.vitesseG);
                     if (Var.personnage.isEnGravite()) Var.toucheSaut = false;
                 }
+                /*
+                if (Var.cubeSelect != null) {
+                    if (Var.toucheT) {
+                        Var.cubeSelect.setY(Var.personnage.getY() + Var.personnage.getHeight() * 0.4);
+                        Var.cubeSelect.setX(Var.personnage.getX() + Var.personnage.getWidth());
+                    } else {
+                        Var.cubeSelect.setY(((Cube) Var.personnage.getCollisionAvec()).getY());
+                        Var.cubeSelect.setX(((Cube) Var.personnage.getCollisionAvec()).getX());
+                    }
+                }
+                */
             }
         };
         timer.start();
