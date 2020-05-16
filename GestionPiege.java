@@ -23,6 +23,17 @@ public class GestionPiege {
                             ((MurMovible) s).setHeight(((MurMovible) s).getHeight() + VITESSE_CHUTE_MUR);
                         }
                     }
+                    //Gestion des lasers
+                    else if (s instanceof Laser) {
+                        if (((Laser) s).getBouton().isOn() && ((Laser) s).getHeight() > 0) {
+                            ((Laser) s).setY(0);
+                            ((Laser) s).setHeight(0);
+                        }
+                        else if (!((Laser) s).getBouton().isOn() && ((Laser) s).getPositionInitiale() > ((Laser) s).getY()) {
+                            ((Laser) s).setY(((Laser) s).getPositionInitiale());
+                            ((Laser) s).setHeight(((Laser) s).getHauteurI());
+                        }
+                    }
                 }
             }
         };

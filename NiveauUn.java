@@ -2,33 +2,36 @@ package jeu;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
-import javafx.stage.Screen;
-
 
 public class NiveauUn {
 
     public NiveauUn() {
 
-        Personnage p = CreerObjet.creerPersonnage(Var.scene.getWidth() * 0.031, Var.scene.getHeight() * 0.114, 150, 500, "perso.png");
-        Var.personnage = p;
+        /*
+        NE PAS OUBLIER D4AJOUTER CHAQUE OBJET CREER A LA FIN DU FICHIER
+         */
 
-        Shape sol1 = CreerObjet.creerMur(Var.scene.getWidth(), 50, 0, Var.scene.getHeight() * 1, Color.BLACK);
-        Var.obstacles.add(sol1);
+        Personnage p = new Personnage(0.078, 0.48, 0.031, 0.114, "Perso.png");
 
-        Shape sol2 = CreerObjet.creerMur(Var.scene.getWidth() * 0.5, Var.scene.getHeight() * 0.028, Var.scene.getWidth() * 0.42, Var.scene.getHeight() * 0.76, Color.BLACK);
-        Bouton bouton1 = CreerObjet.creerBouton(sol2.getBoundsInLocal().getMinX() + sol2.getBoundsInLocal().getWidth() * 0.5, sol2.getBoundsInLocal().getMinY() - 20);
-        MurMovible murM1 = CreerObjet.creerMurMovible(Var.scene.getWidth() * 0.026, Var.scene.getHeight() * 0.20, sol2.getBoundsInLocal().getMinX() + sol2.getBoundsInLocal().getWidth() * 0.7, sol2.getBoundsInLocal().getMinY() - 200, Color.BLACK, bouton1);
-        Cube cube1 = CreerObjet.creerCube(sol2.getBoundsInLocal().getMinX() + sol2.getBoundsInLocal().getWidth() * 0.2, sol2.getBoundsInLocal().getMinY() - 40);
-        Var.obstacles.add(sol2);
-        Var.obstacles.add(bouton1);
-        Var.obstacles.add(murM1);
-        Var.obstacles.add(cube1);
+        Mur sol1 = new Mur(0, 1, 1, 1);
 
-        Shape sol3 = CreerObjet.creerMur(Var.scene.getWidth() * 0.26, Var.scene.getHeight() * 0.028, 0, Var.scene.getHeight() * 0.67, Color.BLACK);
-        Var.obstacles.add(sol3);
+        Mur sol2 = new Mur(0.42, 0.76, 0.028, 0.5);
+        Bouton bouton1 = new Bouton(0.5, sol2);
+        MurMovible murM1 = new MurMovible(0.7, 0.20, 0.2, 0.02, sol2, bouton1, Color.BLACK);
+        Cube cube1 = new Cube(0.2, sol2);
 
-        Var.root.getChildren().addAll(p, sol1, sol2, sol3, bouton1, murM1, cube1);
+        Mur sol3 = new Mur(0, 0.67, 0.028, 0.26);
+        Bouton bouton2 = new Bouton(0.4, sol3);
+        Laser laser1 = new Laser(0.2, 0.2, 0.2, sol3, 20, bouton2);
+
+        MurBlanc mb1 = new MurBlanc(0.52, 0.81, 0.19, 0.026);
+        MurBlanc mb2 = new MurBlanc(0.052, 0.81, 0.19, 0.026);
+
+        final Shape[] obj = {p, sol1, sol2, sol3, bouton1, murM1, cube1, laser1, bouton2, mb1, mb2};
+        Triage.trier(obj);
 
     }
+
+
 
 }

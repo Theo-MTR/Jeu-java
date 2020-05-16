@@ -24,6 +24,9 @@ public class touche {
                 else {
                     Var.toucheT = false;
                     enPrise = false;
+                    Var.cubeEnChute = Var.cubeSelect;
+                    Var.cubeEnChute.setEnGravite(true);
+                    Var.cubeSelect = null;
                 }
             }
         });

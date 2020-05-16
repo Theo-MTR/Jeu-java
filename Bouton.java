@@ -1,30 +1,31 @@
 package jeu;
 
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 
 public class Bouton extends Rectangle {
     private boolean on;
     private double initialY;
     private double initialTaille;
-    public Bouton() {
+    public Bouton(double ratio_x,  Shape sol) {
         super();
         on = false;
+        setWidth(Var.scene.getWidth() * 0.026);
+        setHeight(Var.scene.getHeight() * 0.019);
+        setX(sol.getBoundsInLocal().getMinX() + sol.getBoundsInLocal().getWidth() * ratio_x);
+        setY(sol.getBoundsInLocal().getMinY() - Var.scene.getHeight() * 0.019);
+        setFill(Color.RED);
+        initialY = sol.getBoundsInLocal().getMinY() - Var.scene.getHeight() * 0.019;
+        initialTaille = Var.scene.getHeight() * 0.019;
     }
 
     public double getInitialY() {
         return initialY;
     }
 
-    public void setInitialY(double initialY) {
-        this.initialY = initialY;
-    }
-
     public double getInitialTaille() {
         return initialTaille;
-    }
-
-    public void setInitialTaille(double initialTaille) {
-        this.initialTaille = initialTaille;
     }
 
     public boolean isOn() {
