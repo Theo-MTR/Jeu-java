@@ -5,7 +5,6 @@ import javafx.scene.input.KeyCode;
 public class touche {
 
     private static final double VS = 30;
-    private static boolean enPrise = false;
 
     public static void toucheEv() {
 
@@ -17,16 +16,10 @@ public class touche {
                 Var.toucheQ = true; //SI ON APPUIE SUR "D" ALORS Var.toucheD PASSE A TRUE
             }
             if (ke.getText().toUpperCase().equals("T")) {
-                if (!enPrise) {
+                if (!Var.toucheT) {
                     Var.toucheT = true;
-                    enPrise = true;
-                }
-                else {
+                } else {
                     Var.toucheT = false;
-                    enPrise = false;
-                    Var.cubeEnChute = Var.cubeSelect;
-                    Var.cubeEnChute.setEnGravite(true);
-                    Var.cubeSelect = null;
                 }
             }
         });

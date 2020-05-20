@@ -5,8 +5,7 @@ public class Animation {
         if (s.isOn()) {
             s.setY(s.getY() + s.getInitialTaille() / 2);
             s.setHeight(s.getInitialTaille() - s.getInitialTaille() / 2);
-        }
-        else {
+        } else {
             s.setY(s.getInitialY());
             s.setHeight(s.getInitialTaille());
         }

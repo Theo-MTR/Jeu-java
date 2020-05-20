@@ -26,9 +26,14 @@ public class Gravite {
                     Var.personnage.setEnGravite(true);
                     Var.personnage.setCollisionAvec(null);
                 }
-                if (Var.cubeEnChute != null && Var.cubeEnChute.isEnGravite()) {
-                    Var.cubeEnChute.setY(Var.cubeEnChute.getY() + Var.vitesseG);
-                    Var.vitesseG = Var.vitesseG + GRAVITE;
+
+                //Gestion gravite cube
+                if (Var.cubeSelect != null && Var.cubeSelect.isEnGravite()) {
+                    Var.cubeSelect.setY(Var.cubeSelect.getY() + Var.vitesseGCube);
+                    Var.vitesseGCube = Var.vitesseGCube + GRAVITE;
+                }
+                else {
+                    Var.vitesseGCube = 0;
                 }
             }
         };

@@ -10,18 +10,24 @@ import java.util.Vector;
 
 public class Var {
     protected static Group root = new Group();
-    protected static Scene scene = new Scene(root, 0, 0, Color.DARKGOLDENROD);
+    protected static Scene scene = new Scene(root, 0, 0, Color.LIGHTGRAY);
+
     protected static Personnage personnage;
+
     protected static boolean toucheD = false;
     protected static boolean toucheQ = false;
     protected static boolean toucheT = false;
     protected static boolean toucheSaut = false;
+
     protected static Cube cubeSelect;
-    protected static Cube cubeEnChute;
-    protected static Vector<Shape> obstacles = new Vector<>();
+
     protected static MurBlanc murEntree;
     protected static MurBlanc murSortie;
+
+    protected static Vector<Shape> obstacles = new Vector<>();
     protected static Vector<MurBlanc> listeMurBlanc = new Vector<>();
+    protected static Vector<Cube> listeCube = new Vector<>();
     //Gravite
     protected static double vitesseG = 0;
+    protected static double vitesseGCube = 0;
 }

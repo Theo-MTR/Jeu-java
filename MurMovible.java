@@ -8,14 +8,19 @@ public class MurMovible extends Rectangle {
 
     private Bouton bouton; //Bouton qui actionne le mur
     private double positionInitiale;
-    public MurMovible(double ratio_x, double ratio_y, double ratio_hauteur, double ratio_largeur, Shape sol, Bouton bouton, Paint couleur) {
+    private String orientation;
+
+    public MurMovible(double ratio_x, double ratio_y, double ratio_hauteur, double ratio_largeur, Shape sol, Bouton bouton, Paint couleur, String orientation) {
         this.bouton = bouton;
-        this.positionInitiale = sol.getBoundsInLocal().getMinY() - Var.scene.getHeight() * ratio_y;
         setWidth(Var.scene.getWidth() * ratio_largeur);
         setHeight(Var.scene.getHeight() * ratio_hauteur);
         setX(sol.getBoundsInLocal().getMinX() + sol.getBoundsInLocal().getWidth() * ratio_x);
         setY(sol.getBoundsInLocal().getMinY() - Var.scene.getHeight() * ratio_y);
         setFill(couleur);
+        this.orientation = orientation;
+        if (orientation.equals("v"))
+            this.positionInitiale = sol.getBoundsInLocal().getMinY() - Var.scene.getHeight() * ratio_y;
+        else this.positionInitiale = getX() + getWidth();
     }
 
     public Bouton getBouton() {
@@ -26,4 +31,7 @@ public class MurMovible extends Rectangle {
         return positionInitiale;
     }
 
+    public String getOrientation() {
+        return orientation;
+    }
 }
