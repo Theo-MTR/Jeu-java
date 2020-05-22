@@ -18,7 +18,7 @@ public class MurMovible extends Rectangle {
         setY(sol.getBoundsInLocal().getMinY() - Var.scene.getHeight() * ratio_y);
         setFill(couleur);
         this.orientation = orientation;
-        if (orientation.equals("v"))
+        if ("v".equals(orientation))
             this.positionInitiale = sol.getBoundsInLocal().getMinY() - Var.scene.getHeight() * ratio_y;
         else this.positionInitiale = getX() + getWidth();
     }

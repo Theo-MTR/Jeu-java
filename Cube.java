@@ -1,7 +1,6 @@
 package jeu;
 
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
@@ -10,8 +9,8 @@ import javafx.scene.shape.Shape;
 public class Cube extends Rectangle {
     private boolean enGravite;
 
-    private static final Image i = new Image("cube.png");
-    private static final Paint ip = new ImagePattern(i);
+    private static final Image img = new Image("cube.png");
+    private static final Paint ip = new ImagePattern(img);
 
     public Cube(double ratio_x, Shape sol) {
         super();

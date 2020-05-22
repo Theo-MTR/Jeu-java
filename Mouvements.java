@@ -1,20 +1,48 @@
 package jeu;
 
 import javafx.animation.AnimationTimer;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class Mouvements {
 
     private static final double VITESSE_MARCHE = 10;
 
+    Image d = new Image("AvanceDroite.png");
+    Paint droite = new ImagePattern(d);
+
+    Image g = new Image("AvanceGauche.png");
+    Paint gauche = new ImagePattern(g);
 
     public Mouvements() {
+
+        Rectangle r1 = new Rectangle();
+        Rectangle r2 = new Rectangle();
+        r1.setX(Var.scene.getWidth() * 0.83);
+        r1.setY(Var.scene.getHeight() * 0.02);
+        r1.setHeight(Var.scene.getHeight() * 0.02);
+        r1.setWidth(Var.scene.getWidth() * 0.15 * (Var.personnage.getVie() / 100));
+        r1.setFill(Color.RED);
+        Var.barVie = r1;
+        Var.root.getChildren().add(r1);
+
         AnimationTimer timer = new AnimationTimer() {
             public void handle(long l) {
-                if (Var.toucheD) Var.personnage.setX(Var.personnage.getX() + VITESSE_MARCHE);
-                if (Var.toucheQ) Var.personnage.setX(Var.personnage.getX() - VITESSE_MARCHE);
+                if (Var.toucheD) {
+                    Var.personnage.setX(Var.personnage.getX() + VITESSE_MARCHE);
+                    Var.personnage.setFill(droite);
+                }
+                if (Var.toucheQ) {
+                    Var.personnage.setX(Var.personnage.getX() - VITESSE_MARCHE);
+                    Var.personnage.setFill(gauche);
+                }
                 if (Var.toucheSaut) {
                     Var.personnage.setY(Var.personnage.getY() + Var.vitesseG);
                     if (Var.personnage.isEnGravite()) Var.toucheSaut = false;
@@ -63,6 +91,8 @@ public class Mouvements {
                         }
                     });
                 }
+
+
             }
         };
         timer.start();

@@ -39,4 +39,7 @@ public class Scie extends Circle {
         rotate.playFromStart();
     }
 
+    public int getVie() {
+        return vie;
+    }
 }

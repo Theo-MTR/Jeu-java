@@ -12,13 +12,13 @@ public class NiveauUn {
          */
 
         //Creation du personnage
-        Personnage p = new Personnage(0.2, 0.99, 0.031, 0.114, "perso.png");
+        Personnage p = new Personnage(0.2, 0.99, 0.031, 0.114, "face.png");
 
         //Creation du sol
         Mur sol1 = new Mur(0, 1, 1, 1);
 
         //Creation d'un cube
-        Cube cube1 = new Cube(0.90, sol1);
+        Cube cube1 = new Cube(0.70, sol1);
         Mur mur1 = new Mur(0.98, 0.8, 0.4, 0.1);
         MurBlanc mb1 = new MurBlanc(0.85, 0.8, 0.4, 0.01, "d");
         MurBlanc mb2 = new MurBlanc(0.10, 0.8, 0.4, 0.01, "d");
