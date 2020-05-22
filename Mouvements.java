@@ -1,8 +1,6 @@
 package jeu;
 
 import javafx.animation.AnimationTimer;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
@@ -15,16 +13,15 @@ public class Mouvements {
 
     private static final double VITESSE_MARCHE = 10;
 
-    Image d = new Image("AvanceDroite.png");
-    Paint droite = new ImagePattern(d);
+    private Image d = new Image("AvanceDroite.png");
+    private Paint droite = new ImagePattern(d);
 
-    Image g = new Image("AvanceGauche.png");
-    Paint gauche = new ImagePattern(g);
+    private Image g = new Image("AvanceGauche.png");
+    private Paint gauche = new ImagePattern(g);
 
     public Mouvements() {
 
         Rectangle r1 = new Rectangle();
-        Rectangle r2 = new Rectangle();
         r1.setX(Var.scene.getWidth() * 0.83);
         r1.setY(Var.scene.getHeight() * 0.02);
         r1.setHeight(Var.scene.getHeight() * 0.02);

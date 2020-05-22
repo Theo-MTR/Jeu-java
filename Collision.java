@@ -14,7 +14,7 @@ public class Collision {
                         if (!(s instanceof Bouton)) Var.personnage.setEnGravite(false);
                         if (!(s instanceof Cube)) Var.personnage.setCollisionAvec(s);
                         if (s instanceof Bouton && !((Bouton) s).isOn()) ActionPersonBouton((Bouton) s);
-                        else if (s instanceof Cube && !Var.toucheT); // ActionPersoCube();
+                        //else if (s instanceof Cube && !Var.toucheT); // ActionPersoCube();
                         else if (s instanceof Cube && Var.toucheT && Var.cubeSelect == null) Var.cubeSelect = (Cube) s;
                         else if (s instanceof Mur) ActionPersoMur((Mur) s);
                         else if (s instanceof MurBlanc) ActionPersoMurBlanc((MurBlanc) s);
