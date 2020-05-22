@@ -4,42 +4,49 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.shape.Shape;
 
 public class Collision {
+
     public Collision() {
-        //Collision personnage
+        //Detection de collision avec le personnage
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long l) {
                 for (Shape s : Var.obstacles) {
-                    if (Var.personnage.intersects(s.getBoundsInParent())) {
-                        if (!(s instanceof Bouton)) Var.personnage.setEnGravite(false);
-                        if (!(s instanceof Cube)) Var.personnage.setCollisionAvec(s);
-                        if (s instanceof Bouton && !((Bouton) s).isOn()) ActionPersonBouton((Bouton) s);
-                        else if (s instanceof Cube && !Var.toucheT); // ActionPersoCube();
-                        else if (s instanceof Cube && Var.toucheT && Var.cubeSelect == null) Var.cubeSelect = (Cube) s;
-                        else if (s instanceof Mur) ActionPersoMur((Mur) s);
-                        else if (s instanceof MurBlanc) ActionPersoMurBlanc((MurBlanc) s);
-                    }
-                }
-            }
-        };
-
-        //Collision cube
-        AnimationTimer timer2 = new AnimationTimer() {
-            @Override
-            public void handle(long l) {
-                for (Shape s : Var.obstacles) {
+                    //Gestion de collision cube
                     if (Var.cubeSelect != null && !(s instanceof Cube) && Var.cubeSelect.intersects(s.getBoundsInParent())) {
-                        if (s instanceof Bouton && !((Bouton) s).isOn()) ActionCubeBouton((Bouton) s);
+                        if (s instanceof Bouton && !((Bouton) s).isOn()) {
+                            ((Bouton) s).setOn(true);
+                            Animation.animBouton((Bouton) s);
+                        }
                         if (!(s instanceof MurBlanc)) {
                             Var.cubeSelect.setEnGravite(false);
                             replacerCube(s);
                         }
                     }
+                    //Detection de collision personnage
+                    if (Var.personnage.getBoundsInParent().intersects(s.getBoundsInParent())) {
+                        //gestion des boutons
+                        if (s instanceof Bouton && !((Bouton) s).isOn()) {
+                            ((Bouton) s).setOn(true);
+                            Animation.animBouton((Bouton) s);
+                        }
+                        //Gestion des chutes
+                        if (!(s instanceof Bouton)) {
+                            Var.personnage.setEnGravite(false);
+                        }
+                        if (s instanceof Cube && Var.toucheT && Var.cubeSelect == null) {
+                            Var.cubeSelect = (Cube) s;
+                        }
+                        if (!(s instanceof Cube)) {
+                            Var.personnage.setCollisionAvec(s);
+                        }
+                        replacer(s);
+                    }
+
                 }
+
             }
         };
         timer.start();
-        timer2.start();
     }
 
     private void replacerCube(Shape s) {
@@ -53,52 +60,66 @@ public class Collision {
             Var.personnage.setX(Var.personnage.getX() + 10);
         }
         else {
-            Var.cubeSelect.setY(s.getBoundsInParent().getMinY() - Var.cubeSelect.getHeight() - 1);
+            Var.cubeSelect.setY(s.getBoundsInParent().getMinY() - Var.cubeSelect.getHeight());
             Var.cubeSelect = null;
         }
     }
 
-
-    //Action quand le perso entre en collision avec un mur
-    private void ActionPersoMur(Mur s) {
-        if (Var.personnage.getX() < s.getX() && Var.personnage.getY() > s.getY()) {
-            Var.toucheD = false;
-            Var.personnage.setX(Var.personnage.getX() - 10);
+    private void replacer(Shape s) {
+        //Replacer le personnage en fonction de s'il est au dessus ou au dessous d'une plateforme
+        if (!(s instanceof Cube) && Var.personnage.getY() <= s.getBoundsInParent().getMinY()) {
+            Var.personnage.setEtatInitial(s.getBoundsInLocal().getMinY() - Var.personnage.getHeight());
         }
-        else if (Var.personnage.getX() + Var.personnage.getWidth() > s.getX() + s.getWidth() && Var.personnage.getY() > s.getY()) {
-            Var.toucheQ = false;
-            Var.personnage.setX(Var.personnage.getX() + 10);
-        }
-        if (Var.personnage.getY() <= s.getY()) {
-            Var.personnage.setEtatInitial(s.getY() - Var.personnage.getHeight());
+        //Replacer personnage quand il arrive sur un cube
+        else if ((s instanceof Cube) && Var.personnage.getY() + Var.personnage.getHeight() >= s.getBoundsInLocal().getMinY() && Var.personnage.getY() + Var.personnage.getHeight() < s.getBoundsInLocal().getMaxY()) {
+            Var.personnage.setEtatInitial(s.getBoundsInLocal().getMinY() - Var.personnage.getHeight());
+            Var.cubeSelect = null;
         }
         Var.personnage.setY(Var.personnage.getEtatInitial());
-    }
+        if (s instanceof Mur) {
+            if (Var.personnage.getX() < s.getBoundsInParent().getMinX() && Var.personnage.getY() > s.getBoundsInLocal().getMinY()) {
+                Var.toucheD = false;
+                Var.personnage.setX(Var.personnage.getX() - 10);
+            }
+            else if (Var.personnage.getX() + Var.personnage.getWidth() > s.getBoundsInParent().getMaxX() && Var.personnage.getY() > s.getBoundsInLocal().getMinY()) {
+                Var.toucheQ = false;
+                Var.personnage.setX(Var.personnage.getX() + 10);
+            }
+        }
+        //Replacer personnage si il arrive a droite ou a gauche d'un mur et l'empecher d'avancer
+        if (s instanceof MurMovible || s instanceof Laser) {
+            Var.barVie.setWidth(Var.scene.getWidth() * 0.15 * (1 - (Var.personnage.getVie() / 100)));
+            if (Var.personnage.getY() > s.getBoundsInParent().getMinY()) {
+                if (Var.personnage.getX() < s.getBoundsInParent().getMinX()) {
+                    if (s instanceof Laser) {
+                        Var.personnage.setVie(Var.personnage.getVie() - ((Laser) s).getVie());
+                    }
+                    Var.toucheD = false;
+                    Var.personnage.setX(Var.personnage.getX() - 10);
+                }
+                if (Var.personnage.getX() + Var.personnage.getWidth() > s.getBoundsInParent().getMaxX()) {
+                    Var.toucheQ = false;
+                    Var.personnage.setX(Var.personnage.getX() + 10);
+                }
 
-    //Action quand le perso entre en collision avec un bouton
-    private void ActionPersonBouton(Bouton s) {
-        s.setOn(true);
-        Animation.animBouton(s);
-        Var.personnage.setEtatInitial(s.getY() - Var.personnage.getHeight());
-        Var.personnage.setY(Var.personnage.getEtatInitial());
-    }
-
-    //Action qaund un cube entre en collision avec un bouton
-    private void ActionCubeBouton(Bouton s) {
-        s.setOn(true);
-        Animation.animBouton(s);
-    }
-
-    //Action quand le perso entre en collision avec un mur blanc (avec et sans portail)
-    private void ActionPersoMurBlanc(MurBlanc s) {
+            }
+        }
         if (s instanceof MurBlanc) {
             if (s == Var.murEntree && Var.murSortie != null) {
                 if (Var.murSortie.getOrientation().equals("d")) {
                     Var.personnage.setX(Var.murSortie.getX() + Var.murSortie.getWidth() + 1);
                     Var.personnage.setY(Var.murSortie.getY() + Var.murSortie.getHeight() - Var.personnage.getHeight());
+                    if (Var.cubeSelect != null) {
+                        Var.cubeSelect.setY(Var.personnage.getY() + Var.personnage.getHeight() * 0.4);
+                        Var.cubeSelect.setX(Var.personnage.getX() + Var.personnage.getWidth() + 1);
+                    }
                 } else if (Var.murSortie.getOrientation().equals("g")) {
                     Var.personnage.setX(Var.murSortie.getX() - Var.personnage.getWidth() - 1);
                     Var.personnage.setY(Var.murSortie.getY() + Var.murSortie.getHeight() - Var.personnage.getHeight());
+                    if (Var.cubeSelect != null) {
+                        Var.cubeSelect.setY(Var.personnage.getY() + Var.personnage.getHeight() * 0.4);
+                        Var.cubeSelect.setX(Var.personnage.getX() - Var.cubeSelect.getWidth() - 1);
+                    }
                 }
             }
             else {
@@ -113,5 +134,4 @@ public class Collision {
             }
         }
     }
-
 }
