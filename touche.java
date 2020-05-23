@@ -15,6 +15,9 @@ public class touche {
             if (ke.getText().toUpperCase().equals("Q")) {
                 Var.toucheQ = true; //SI ON APPUIE SUR "D" ALORS Var.toucheD PASSE A TRUE
             }
+            if (ke.getText().toUpperCase().equals("I")) {
+                System.out.println(Var.personnage.getEtatInitial() );
+            }
             if (ke.getText().toUpperCase().equals("T")) {
                 if (!Var.toucheT) {
                     Var.toucheT = true;

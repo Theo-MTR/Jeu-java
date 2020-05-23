@@ -15,9 +15,10 @@ public class Collision {
                         if (!(s instanceof Cube)) Var.personnage.setCollisionAvec(s);
                         if (s instanceof Bouton && !((Bouton) s).isOn()) ActionPersonBouton((Bouton) s);
                         //else if (s instanceof Cube && !Var.toucheT); // ActionPersoCube();
-                        else if (s instanceof Cube && Var.toucheT && Var.cubeSelect == null) Var.cubeSelect = (Cube) s;
-                        else if (s instanceof Mur) ActionPersoMur((Mur) s);
                         else if (s instanceof MurBlanc) ActionPersoMurBlanc((MurBlanc) s);
+                        else if (s instanceof Cube && Var.toucheT && Var.cubeSelect == null) Var.cubeSelect = (Cube) s;
+                        else if (s instanceof Mur || s instanceof MurMovible) ActionPersoMur(s);
+
                     }
                 }
             }
@@ -61,17 +62,17 @@ public class Collision {
 
 
     //Action quand le perso entre en collision avec un mur
-    private void ActionPersoMur(Mur s) {
-        if (Var.personnage.getX() < s.getX() && Var.personnage.getY() > s.getY()) {
+    private void ActionPersoMur(Shape s) {
+        if (Var.personnage.getX() < s.getBoundsInParent().getMinX() && Var.personnage.getY() > s.getBoundsInParent().getMinY()) {
             Var.toucheD = false;
             Var.personnage.setX(Var.personnage.getX() - 10);
         }
-        else if (Var.personnage.getX() + Var.personnage.getWidth() > s.getX() + s.getWidth() && Var.personnage.getY() > s.getY()) {
+        else if (Var.personnage.getX() + Var.personnage.getWidth() > s.getBoundsInParent().getMaxX() && Var.personnage.getY() > s.getBoundsInParent().getMinY()) {
             Var.toucheQ = false;
             Var.personnage.setX(Var.personnage.getX() + 10);
         }
-        if (Var.personnage.getY() <= s.getY()) {
-            Var.personnage.setEtatInitial(s.getY() - Var.personnage.getHeight());
+        if (Var.personnage.getY() <= s.getBoundsInParent().getMinY()) {
+            Var.personnage.setEtatInitial(s.getBoundsInParent().getMinY() - Var.personnage.getHeight());
         }
         Var.personnage.setY(Var.personnage.getEtatInitial());
     }
@@ -100,12 +101,18 @@ public class Collision {
         if (s instanceof MurBlanc) {
             if (s == Var.murEntree && Var.murSortie != null) {
                 if (Var.murSortie.getOrientation().equals("d")) {
-                    Var.personnage.setX(Var.murSortie.getX() + Var.murSortie.getWidth() + 1);
-                    Var.personnage.setY(Var.murSortie.getY() + Var.murSortie.getHeight() - Var.personnage.getHeight());
-                } else if (Var.murSortie.getOrientation().equals("g")) {
+                    Var.personnage.setEtatInitial(Var.murSortie.getY() + Var.murSortie.getHeight() - Var.personnage.getHeight() - 1);
+                    Var.personnage.setX(Var.murSortie.getX() + Var.murSortie.getWidth() + 10);
+                } if (Var.murSortie.getOrientation().equals("g")) {
+                    Var.personnage.setEtatInitial(Var.murSortie.getY() + Var.murSortie.getHeight() - Var.personnage.getHeight() - 1);
                     Var.personnage.setX(Var.murSortie.getX() - Var.personnage.getWidth() - 1);
-                    Var.personnage.setY(Var.murSortie.getY() + Var.murSortie.getHeight() - Var.personnage.getHeight());
                 }
+                if (Var.murSortie.getOrientation().equals("b")) {
+                    Var.personnage.setX(Var.murSortie.getX() + Var.personnage.getWidth() - 1);
+                    Var.personnage.setEtatInitial(Var.murSortie.getY() + Var.murSortie.getHeight() + 1);
+                    Var.personnage.setEnGravite(true);
+                }
+                Var.personnage.setY(Var.personnage.getEtatInitial());
             }
             else {
                 if (Var.personnage.getX() < s.getBoundsInParent().getMinX()) {
