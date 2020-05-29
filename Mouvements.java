@@ -1,4 +1,4 @@
-package jeu;
+package org.openjfx;
 
 import javafx.animation.AnimationTimer;
 import javafx.scene.image.Image;
@@ -32,11 +32,11 @@ public class Mouvements {
 
         AnimationTimer timer = new AnimationTimer() {
             public void handle(long l) {
-                if (Var.toucheD) {
+                if (Var.toucheD && Var.personnage.getX() + Var.personnage.getWidth() < Var.scene.getWidth()) {
                     Var.personnage.setX(Var.personnage.getX() + VITESSE_MARCHE);
                     Var.personnage.setFill(droite);
                 }
-                if (Var.toucheQ) {
+                if (Var.toucheQ && Var.personnage.getX() > Var.scene.getX()) {
                     Var.personnage.setX(Var.personnage.getX() - VITESSE_MARCHE);
                     Var.personnage.setFill(gauche);
                 }

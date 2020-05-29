@@ -1,4 +1,4 @@
-package jeu;
+package org.openjfx;
 
 import javafx.animation.AnimationTimer;
 
@@ -18,7 +18,7 @@ public class Gravite {
                     Var.vitesseG = 0;
                 }
                 //Faire tomber le personnage lorsqu'il quitte une plateforme
-                if ((Var.personnage.getCollisionAvec() != null) && (Var.personnage.getX() + Var.personnage.getWidth() < Var.personnage.getCollisionAvec().getBoundsInLocal().getMinX() || Var.personnage.getX() > Var.personnage.getCollisionAvec().getBoundsInLocal().getMaxX()) && Var.personnage.getY() + Var.personnage.getHeight() <= Var.personnage.getCollisionAvec().getBoundsInLocal().getMinY()) {
+                if ((Var.personnage.getCollisionAvec() != null) && (Var.personnage.getX() + Var.personnage.getWidth() < Var.personnage.getCollisionAvec().getBoundsInLocal().getMinX() || Var.personnage.getX() > Var.personnage.getCollisionAvec().getBoundsInLocal().getMaxX()) && Var.personnage.getY() <= Var.personnage.getCollisionAvec().getBoundsInLocal().getMinY()) {
                     if (Var.personnage.getCollisionAvec() instanceof Bouton) {
                         ((Bouton) Var.personnage.getCollisionAvec()).setOn(false);
                         Animation.animBouton((Bouton)Var.personnage.getCollisionAvec());

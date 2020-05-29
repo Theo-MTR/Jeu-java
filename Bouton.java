@@ -1,10 +1,11 @@
-package jeu;
+package org.openjfx;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 public class Bouton extends Rectangle {
+    private final String nom = "Bouton";
     private boolean on;
     private double initialY;
     private double initialTaille;
@@ -37,5 +38,8 @@ public class Bouton extends Rectangle {
     }
 
 
-
+    @Override
+    public String toString() {
+        return "Bouton{" + "nom='" + nom + '\'' + ", on=" + on + ", initialY=" + initialY + ", initialTaille=" + initialTaille + '}';
+    }
 }

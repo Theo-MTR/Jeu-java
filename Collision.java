@@ -1,4 +1,4 @@
-package jeu;
+package org.openjfx;
 
 import javafx.animation.AnimationTimer;
 import javafx.scene.shape.Shape;
@@ -11,19 +11,18 @@ public class Collision {
             public void handle(long l) {
                 for (Shape s : Var.obstacles) {
                     if (Var.personnage.intersects(s.getBoundsInParent())) {
-                        if (!(s instanceof Bouton)) Var.personnage.setEnGravite(false);
+                        /* Enlever gravité generale */
+                        //if (!(s instanceof Bouton)) Var.personnage.setEnGravite(false);
                         if (!(s instanceof Cube)) Var.personnage.setCollisionAvec(s);
                         if (s instanceof Bouton && !((Bouton) s).isOn()) ActionPersonBouton((Bouton) s);
                         //else if (s instanceof Cube && !Var.toucheT); // ActionPersoCube();
                         else if (s instanceof MurBlanc) ActionPersoMurBlanc((MurBlanc) s);
                         else if (s instanceof Cube && Var.toucheT && Var.cubeSelect == null) Var.cubeSelect = (Cube) s;
                         else if (s instanceof Mur || s instanceof MurMovible) ActionPersoMur(s);
-
                     }
                 }
             }
         };
-
         //Collision cube
         AnimationTimer timer2 = new AnimationTimer() {
             @Override
@@ -66,19 +65,27 @@ public class Collision {
         if (Var.personnage.getX() < s.getBoundsInParent().getMinX() && Var.personnage.getY() > s.getBoundsInParent().getMinY()) {
             Var.toucheD = false;
             Var.personnage.setX(Var.personnage.getX() - 10);
+            Var.personnage.setEnGravite(true);
         }
         else if (Var.personnage.getX() + Var.personnage.getWidth() > s.getBoundsInParent().getMaxX() && Var.personnage.getY() > s.getBoundsInParent().getMinY()) {
             Var.toucheQ = false;
             Var.personnage.setX(Var.personnage.getX() + 10);
+            Var.personnage.setEnGravite(true);
         }
         if (Var.personnage.getY() <= s.getBoundsInParent().getMinY()) {
+            Var.personnage.setEnGravite(false);
             Var.personnage.setEtatInitial(s.getBoundsInParent().getMinY() - Var.personnage.getHeight());
+            Var.personnage.setY(Var.personnage.getEtatInitial());
+
         }
-        Var.personnage.setY(Var.personnage.getEtatInitial());
+        else if (Var.personnage.getY() + Var.personnage.getHeight() > s.getBoundsInParent().getMaxY()) {
+            Var.personnage.setY(Var.personnage.getEtatInitial());
+        }
     }
 
     //Action quand le perso entre en collision avec un bouton
     private void ActionPersonBouton(Bouton s) {
+        Var.personnage.setEnGravite(false);
         s.setOn(true);
         Animation.animBouton(s);
         Var.personnage.setEtatInitial(s.getY() - Var.personnage.getHeight());
@@ -119,10 +126,11 @@ public class Collision {
                     Var.toucheD = false;
                     Var.personnage.setX(Var.personnage.getX() - 10);
                 }
-                if (Var.personnage.getX() + Var.personnage.getWidth() > s.getBoundsInParent().getMaxX()) {
+                else if (Var.personnage.getX() + Var.personnage.getWidth() > s.getBoundsInParent().getMaxX()) {
                     Var.toucheQ = false;
                     Var.personnage.setX(Var.personnage.getX() + 10);
                 }
+
             }
         }
     }

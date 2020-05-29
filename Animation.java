@@ -1,4 +1,4 @@
-package jeu;
+package org.openjfx;
 
 public class Animation {
     protected static void animBouton(Bouton s) {

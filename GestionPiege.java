@@ -1,4 +1,4 @@
-package jeu;
+package org.openjfx;
 
 import javafx.animation.AnimationTimer;
 import javafx.scene.shape.Shape;

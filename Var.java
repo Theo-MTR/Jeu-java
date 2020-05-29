@@ -1,4 +1,4 @@
-package jeu;
+package org.openjfx;
 //Class regroupant toute les variables communes du jeu
 
 import javafx.scene.Group;
@@ -17,6 +17,7 @@ public class Var {
     protected static Personnage personnage;
     protected static Rectangle barVie;
 
+    protected static boolean demmare = false;
     protected static boolean n1 = false;
     protected static boolean n2 = false;
     protected static boolean n3 = false;
