@@ -2,8 +2,7 @@ package org.openjfx;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.*;
-import javafx.stage.Stage;
+import javafx.scene.control.Button;
 
 
 public class Acceuil {
