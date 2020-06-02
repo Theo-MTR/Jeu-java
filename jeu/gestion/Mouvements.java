@@ -17,10 +17,10 @@ public class Mouvements {
 
     private static final double VITESSE_MARCHE = 10;
 
-    private Image d = new Image(Paths.get("AvanceDroite.png").toUri().toString());
+    private Image d = new Image(Paths.get("Ressources/AvanceDroite.png").toUri().toString());
     private Paint droite = new ImagePattern(d);
 
-    private Image g = new Image(Paths.get("AvanceGauche.png").toUri().toString());
+    private Image g = new Image(Paths.get("Ressources/AvanceGauche.png").toUri().toString());
     private Paint gauche = new ImagePattern(g);
 
     public Mouvements() {
@@ -40,11 +40,11 @@ public class Mouvements {
                     Var.personnage.setX(Var.personnage.getX() + VITESSE_MARCHE);
                     Var.personnage.setFill(droite);
                 }
-                if (Var.toucheQ && Var.personnage.getX() > Var.scene.getX()) {
+                else if (Var.toucheQ && Var.personnage.getX() > Var.scene.getX()) {
                     Var.personnage.setX(Var.personnage.getX() - VITESSE_MARCHE);
                     Var.personnage.setFill(gauche);
                 }
-                if (Var.toucheSaut) {
+                else if (Var.toucheSaut) {
                     Var.personnage.setY(Var.personnage.getY() + Var.vitesseG);
                     if (Var.personnage.isEnGravite()) Var.toucheSaut = false;
                     if (Var.personnage.getCollisionAvec() != null && Var.personnage.getCollisionAvec() instanceof Bouton) {
@@ -59,7 +59,7 @@ public class Mouvements {
                             Var.cubeSelect.setY(Var.personnage.getY() + Var.personnage.getHeight() * 0.4);
                             Var.cubeSelect.setX(Var.personnage.getX() + Var.personnage.getWidth() + 1);
                         }
-                        if (Var.toucheQ) {
+                        else if (Var.toucheQ) {
                             Var.cubeSelect.setY(Var.personnage.getY() + Var.personnage.getHeight() * 0.4);
                             Var.cubeSelect.setX(Var.personnage.getX() - Var.cubeSelect.getWidth() - 1);
                         } else Var.cubeSelect.setY(Var.personnage.getY() + Var.personnage.getHeight() * 0.4);
