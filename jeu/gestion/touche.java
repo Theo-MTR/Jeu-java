@@ -12,13 +12,13 @@ public class touche {
             if (ke.getText().toUpperCase().equals("D")) {
                 Var.toucheD = true; //SI ON APPUIE SUR "D" ALORS Var.toucheD PASSE A TRUE
             }
-            if (ke.getText().toUpperCase().equals("Q")) {
+            else if (ke.getText().toUpperCase().equals("Q")) {
                 Var.toucheQ = true; //SI ON APPUIE SUR "D" ALORS Var.toucheD PASSE A TRUE
             }
-            if (ke.getText().toUpperCase().equals("I")) {
+            else if (ke.getText().toUpperCase().equals("I")) {
                 System.out.println(Var.personnage.getEtatInitial() );
             }
-            if (ke.getText().toUpperCase().equals("T")) {
+            else if (ke.getText().toUpperCase().equals("T")) {
                 if (!Var.toucheT) {
                     Var.toucheT = true;
                 } else {
@@ -31,10 +31,10 @@ public class touche {
             if (ke.getText().toUpperCase().equals("D")) {
                 Var.toucheD = false; //SI ON LACHE "D" ALORS toucheD PASSE A FALSE
             }
-            if (ke.getText().toUpperCase().equals("Q")) {
+            else if (ke.getText().toUpperCase().equals("Q")) {
                 Var.toucheQ = false; //SI ON APPUIE SUR "D" ALORS Var.toucheD PASSE A TRUE
             }
-            if (ke.getCode() == KeyCode.SPACE && !Var.personnage.isEnGravite()) {
+            else if (ke.getCode() == KeyCode.SPACE && !Var.personnage.isEnGravite()) {
                 Var.personnage.setEtatInitial(Var.personnage.getY());
                 Var.toucheSaut = true;
                 Var.personnage.setEnGravite(true);
