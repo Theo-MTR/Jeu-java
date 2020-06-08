@@ -7,9 +7,9 @@ import jeu.gestion.Var;
 
 public class MurMovible extends Rectangle {
 
-    private Bouton bouton; //Bouton qui actionne le mur
-    private double positionInitiale;
-    private String orientation;
+    private final Bouton bouton; //Bouton qui actionne le mur
+    private final double positionInitiale;
+    private final String orientation;
 
     public MurMovible(double ratio_x, double ratio_y, double ratio_hauteur, double ratio_largeur, Shape sol, Bouton bouton, Paint couleur, String orientation) {
         this.bouton = bouton;

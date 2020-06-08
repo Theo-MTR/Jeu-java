@@ -3,7 +3,7 @@ package jeu.gestion;
 
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.control.Label;
 import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 import jeu.objets.Cube;
@@ -18,12 +18,12 @@ public class Var {
     public static Stage stage;
 
     protected static Personnage personnage;
-    protected static Rectangle barVie;
+    protected static Label l;
 
     public static boolean demmare = false;
     public static boolean n1 = false;
     public static boolean n2 = false;
-    protected static boolean n3 = false;
+    //protected static boolean n3 = false;
     protected static boolean toucheD = false;
     protected static boolean toucheQ = false;
     protected static boolean toucheT = false;

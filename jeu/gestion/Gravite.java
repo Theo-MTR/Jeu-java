@@ -5,14 +5,14 @@ import jeu.objets.Bouton;
 
 public class Gravite {
 
-    private final static int GRAVITE = 2;
+    private final static double GRAVITE = 0.0019;
 
     public Gravite() {
         AnimationTimer timer = new AnimationTimer() {
             public void handle(long l) {
                 if (Var.personnage.isEnGravite()) {
                     Var.personnage.setY(Var.personnage.getY() + Var.vitesseG);
-                    Var.vitesseG = Var.vitesseG + GRAVITE;
+                    Var.vitesseG = Var.vitesseG + Var.scene.getHeight() * GRAVITE;
                 }
                 //SI IL Y A COLLISION AVEC UNE PLATEFORME VITESSEG REVIENT A ZERO SINON LE PERSO TOMBERA PLUS VITE A CHAQUE CHUTE
                 else {
@@ -31,7 +31,7 @@ public class Gravite {
                 //Gestion gravite cube
                 if (Var.cubeSelect != null && Var.cubeSelect.isEnGravite()) {
                     Var.cubeSelect.setY(Var.cubeSelect.getY() + Var.vitesseGCube);
-                    Var.vitesseGCube = Var.vitesseGCube + GRAVITE;
+                    Var.vitesseGCube = Var.vitesseGCube + Var.scene.getHeight() *  GRAVITE;
                 }
                 else {
                     Var.vitesseGCube = 0;

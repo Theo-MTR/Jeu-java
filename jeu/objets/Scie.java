@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 
 public class Scie extends Circle {
 
-    private static final Image i = new Image(Paths.get("scie.png").toUri().toString());
+    private static final Image i = new Image(Paths.get("Ressources/scie.png").toUri().toString());
     private static final Paint ip = new ImagePattern(i);
 
     private final int vie;

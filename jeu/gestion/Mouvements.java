@@ -1,12 +1,13 @@
 package jeu.gestion;
 
 import javafx.animation.AnimationTimer;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import jeu.objets.Bouton;
 import jeu.objets.MurBlanc;
@@ -17,22 +18,22 @@ public class Mouvements {
 
     private static final double VITESSE_MARCHE = 10;
 
-    private Image d = new Image(Paths.get("Ressources/AvanceDroite.png").toUri().toString());
-    private Paint droite = new ImagePattern(d);
+    private final Image d = new Image(Paths.get("Ressources/AvanceDroite.png").toUri().toString());
+    private final Paint droite = new ImagePattern(d);
 
-    private Image g = new Image(Paths.get("Ressources/AvanceGauche.png").toUri().toString());
-    private Paint gauche = new ImagePattern(g);
+    private final Image g = new Image(Paths.get("Ressources/AvanceGauche.png").toUri().toString());
+    private final Paint gauche = new ImagePattern(g);
 
     public Mouvements() {
 
-        Rectangle r1 = new Rectangle();
-        r1.setX(Var.scene.getWidth() * 0.83);
-        r1.setY(Var.scene.getHeight() * 0.02);
-        r1.setHeight(Var.scene.getHeight() * 0.02);
-        r1.setWidth(Var.scene.getWidth() * 0.15 * (Var.personnage.getVie() / 100));
-        r1.setFill(Color.RED);
-        Var.barVie = r1;
-        Var.root.getChildren().add(r1);
+        Label l = new Label(String.valueOf(Var.personnage.getVie()));
+        l.setFont(new Font("Arial", 30));
+        l.setTextFill(Color.GREEN);
+        l.setTranslateX(Var.scene.getWidth() * 0.95);
+        l.setTranslateY(Var.scene.getHeight() * 0.02);
+        Var.l = l;
+        Var.root.getChildren().add(l);
+
 
         AnimationTimer timer = new AnimationTimer() {
             public void handle(long l) {

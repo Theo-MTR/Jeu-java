@@ -20,7 +20,7 @@ public class GestionPiege {
                             if (((MurMovible) s).getBouton().isOn() && ((MurMovible) s).getHeight() > 0) {
                                 ((MurMovible) s).setY(((MurMovible) s).getY() + VITESSE_CHUTE_MUR);
                                 ((MurMovible) s).setHeight(((MurMovible) s).getHeight() - VITESSE_CHUTE_MUR);
-                            } else if (!((MurMovible) s).getBouton().isOn() && ((MurMovible) s).getPositionInitiale() < ((MurMovible) s).getY()) {
+                            } else if (!((MurMovible) s).getBouton().isOn() && ((MurMovible) s).getPositionInitiale() < ((MurMovible) s).getY() && s != Var.personnage.getCollisionAvec()) {
                                 ((MurMovible) s).setY(((MurMovible) s).getY() - VITESSE_CHUTE_MUR);
                                 ((MurMovible) s).setHeight(((MurMovible) s).getHeight() + VITESSE_CHUTE_MUR);
                             }

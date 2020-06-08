@@ -16,7 +16,7 @@ public class NiveauTrois {
          */
 
         //Creation du personnage
-        Personnage p = new Personnage(0.2, 0.99, 0.031, 0.114, Paths.get("Face.png").toUri().toString());
+        Personnage p = new Personnage(0.2, 0.99, 0.031, 0.114, Paths.get("Ressources/Face.png").toUri().toString());
 
         //Creation du sol
         Mur sol1 = new Mur(0, 1, 1, 1);

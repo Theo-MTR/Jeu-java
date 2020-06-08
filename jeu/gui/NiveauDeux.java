@@ -25,7 +25,7 @@ public class NiveauDeux {
          */
 
         //Creation du personnage
-        Personnage p = new Personnage(0.05, 0.886, 0.031, 0.114, Paths.get("Face.png").toUri().toString());
+        Personnage p = new Personnage(0.05, 0.886, 0.031, 0.114, Paths.get("Ressources/Face.png").toUri().toString());
 
         //Creation du sol
         Mur sol1 = new Mur(0, 1, 1, 1);
@@ -88,7 +88,9 @@ public class NiveauDeux {
         Laser l2 = new Laser(0.5,0.18,0.18 ,sol6,100,b3);
         Laser l3 = new Laser(0.485,0.18,0.18,sol7,100,b3);
 
-        final Shape[] obj = {p, sol1,sol2, b1, av1,sol3,scie1,sol4,l1,sol5,nb1,nb2,nb3,nb4,b2, cb1,sol6,sol7,nb5,nb6,nb7,nb8,nb9,sol8,b3,mur1,nb10,nb11,cb2,l2,l3,scie2,scie3,av2,av3,sol9,scie4,scie5};
+        Porte porte = new Porte(0.49, sol1, 1);
+
+        final Shape[] obj = {p, sol1,sol2, b1, av1,sol3,scie1,sol4,l1,sol5,nb1,nb2,nb3,nb4,b2, cb1,sol6,sol7,nb5,nb6,nb7,nb8,nb9,sol8,b3,mur1,nb10,nb11,cb2,l2,l3,scie2,scie3,av2,av3,sol9,scie4,scie5, porte};
         Triage.trier(obj);
 
     }

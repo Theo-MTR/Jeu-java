@@ -34,7 +34,7 @@ public class Main extends Application {
         });
     }
 
-    private void demarrer() {
+    public static void demarrer() {
         if (!Var.demmare) {
             Var.root = new Group();
             Var.scene = new Scene(Var.root, 0, 0, Color.LIGHTGRAY);
@@ -52,7 +52,7 @@ public class Main extends Application {
                 Var.stage.setScene(Var.scene);
                 Var.root.getChildren().removeAll(Var.obstacles);
                 Var.obstacles.removeAllElements();
-                new NiveauDeux();
+                new NiveauUn();
             }
             new Mouvements();
             new Gravite();
