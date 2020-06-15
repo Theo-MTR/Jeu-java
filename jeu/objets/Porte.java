@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 
 public class Porte extends Rectangle {
 
-    private static final Image img = new Image(Paths.get("Ressources/cube.png").toUri().toString()); //Image de base d'un cube
+    private static final Image img = new Image(Paths.get("Ressources/Porte.png").toUri().toString()); //Image de base d'un cube
     private static final Paint ip = new ImagePattern(img);
 
     private final int niveau;

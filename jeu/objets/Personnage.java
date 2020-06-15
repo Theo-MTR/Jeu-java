@@ -13,6 +13,7 @@ public class Personnage extends Rectangle{
     private boolean enGravite;
     private double etatInitial;
     private int vie;
+    private Cube cubeSelect;
 
     public Personnage(double ratio_x, double ratio_y, double ratio_l, double ratio_h, String image) {
         super();
@@ -58,5 +59,13 @@ public class Personnage extends Rectangle{
 
     public void setVie(int vie) {
         this.vie = vie;
+    }
+
+    public Cube getCubeSelect() {
+        return cubeSelect;
+    }
+
+    public void setCubeSelect(Cube cubeSelect) {
+        this.cubeSelect = cubeSelect;
     }
 }

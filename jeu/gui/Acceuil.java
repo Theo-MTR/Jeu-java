@@ -24,16 +24,18 @@ public class Acceuil {
         ivIcon.setImage(icon);
         ivStart.setImage(start);
 
-        //Positionnement des ImagesView
+        //Positionnement X des ImagesView
         ivTitre.setX(Var.scene.getWidth() * 0.5 - (Var.scene.getWidth() * 0.57 * 0.5));
         ivIcon.setX(Var.scene.getWidth() * 0.5 - (Var.scene.getWidth() * 0.031 * 0.5));
+        ivStart.setX(Var.scene.getWidth() * 0.5 - (Var.scene.getWidth() * 0.57 * 0.5));
+
+        //Positionnement Y des ImagesView
         ivIcon.setY(Var.scene.getHeight() * 0.5 - (Var.scene.getHeight() * 0.012 * 0.5));
-        ivStart.setX(Var.scene.getWidth() * 0.5 - (Var.scene.getWidth() * 0.42 * 0.5));
-        ivStart.setY(Var.scene.getHeight() * 0.95 - (Var.scene.getHeight() * 0.099 * 0.5));
+        ivStart.setY(Var.scene.getHeight() * 0.90 - (Var.scene.getHeight() * 0.099 * 0.5));
 
         ivTitre.setFitWidth(Var.scene.getWidth() * 0.57);
         ivIcon.setFitWidth(Var.scene.getWidth() * 0.031);
-        ivStart.setFitWidth(Var.scene.getWidth() * 0.42);
+        ivStart.setFitWidth(Var.scene.getWidth() * 0.57);
 
         Var.root.getChildren().addAll(ivTitre, ivIcon, ivStart);
     }

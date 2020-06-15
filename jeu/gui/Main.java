@@ -37,28 +37,29 @@ public class Main extends Application {
     public static void demarrer() {
         if (!Var.demmare) {
             Var.root = new Group();
-            Var.scene = new Scene(Var.root, 0, 0, Color.LIGHTGRAY);
+            Var.scene = new Scene(Var.root, 0, 0,  Color.LIGHTGRAY);
             Var.stage.setScene(Var.scene);
             new Acceuil();
         } else {
             if (!Var.n1) {
-                Var.root = new Group();
-                Var.scene = new Scene(Var.root, 0, 0, Color.LIGHTGRAY);
-                Var.stage.setScene(Var.scene);
-                new NiveauDeux();
-            } else if (!Var.n2) {
-                Var.root = new Group();
-                Var.scene = new Scene(Var.root, 0, 0, Color.LIGHTGRAY);
-                Var.stage.setScene(Var.scene);
-                Var.root.getChildren().removeAll(Var.obstacles);
-                Var.obstacles.removeAllElements();
+                Var.root.getChildren().removeAll(Var.root.getChildren());
                 new NiveauUn();
+            } else if (!Var.n2) {
+                Var.root.getChildren().removeAll(Var.root.getChildren());
+                Var.init();
+                Touche.stopTimer();
+                Vie.stopTimer();
+                Collision.stopTimer();
+                Gravite.stopTimer();
+                GestionPiege.stopTimer();
+                new NiveauDeux();
             }
-            new Mouvements();
-            new Gravite();
-            new Collision();
+            Vie.configVie();
+            Gravite.gestGravite();
+            Collision.CheckCollision();
             new GestionPiege();
-            touche.toucheEv();
+            Touche.etatTouche();
+            Touche.ActionTouche();
 
         }
     }

@@ -17,7 +17,7 @@ public class Laser extends Rectangle {
     private final double positionInitiale;
     private final double hauteurI;
 
-    private final Bouton bouton; //Bouton qui desactive le laser
+    private final Bouton bouton; //Bouton qui desactive le laser, grace à ça on a juste à regarder son etat, si il est sur on alors on anim l'objet qui lui est lié
 
     public Laser(double ratio_x, double ratio_y, double ratio_h, Shape sol, int vie, Bouton bouton) {
         super();
@@ -33,9 +33,10 @@ public class Laser extends Rectangle {
         setWidth(10); //Taille de base
         setHeight(Var.scene.getHeight() * ratio_h); //Hauteur réglée grace au ratio h ainsi que la taille de la fenêtre de jeu
         hauteurI = Var.scene.getHeight() * ratio_h; //Sauvegarde de la hauteur
-        this.vie = vie;
-        this.bouton = bouton;
+        this.vie = vie; //Vie que retire le laser
+        this.bouton = bouton; //Bouton qui l'active / desactive
     }
+
     public int getVie() {
         return vie;
     }

@@ -81,14 +81,14 @@ public class NiveauDeux {
 
         Laser l1 = new Laser(0.5,0.18,0.18,sol2,60,b2);
         Scie scie1 = new Scie(0,20,sol3);
-        Scie scie2 = new Scie(0,80,sol8);
-        Scie scie3 = new Scie(1,80,sol8);
+        Scie scie2 = new Scie(0,20,sol8);
+        Scie scie3 = new Scie(1,20,sol8);
         Scie scie4 = new Scie(0,20,sol9);
         Scie scie5 = new Scie(1,20,sol9);
         Laser l2 = new Laser(0.5,0.18,0.18 ,sol6,100,b3);
         Laser l3 = new Laser(0.485,0.18,0.18,sol7,100,b3);
 
-        Porte porte = new Porte(0.49, sol1, 1);
+        Porte porte = new Porte(0.49, sol8, 2);
 
         final Shape[] obj = {p, sol1,sol2, b1, av1,sol3,scie1,sol4,l1,sol5,nb1,nb2,nb3,nb4,b2, cb1,sol6,sol7,nb5,nb6,nb7,nb8,nb9,sol8,b3,mur1,nb10,nb11,cb2,l2,l3,scie2,scie3,av2,av3,sol9,scie4,scie5, porte};
         Triage.trier(obj);

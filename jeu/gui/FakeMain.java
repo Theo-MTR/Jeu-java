@@ -1,3 +1,6 @@
+/*
+Classe necessaire pour la creation d'un .jar avec javafx 11
+ */
 package jeu.gui;
 
 public class FakeMain {

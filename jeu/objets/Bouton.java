@@ -14,7 +14,10 @@ public class Bouton extends Rectangle {
     private boolean on; //Variable pour savoir si le bouton est actif
     private final double initialY; //Variable ou on stock la valeur Y initial du bouton pour pouvoir le remettre dans sa position lorsqu'il n'est plus sur 'on'.
     private final double initialTaille; //Variable ou on stock la valeur de la taille initiale du bouton pour pouvoir le remettre dans sa position lorsqu'il n'est plus sur 'on'.
-    public Bouton(double ratio_x,  Shape sol) {
+    private Cube cube;
+
+
+    public Bouton(double ratio_x, Shape sol) {
         /*
         AFin que les element s'adaptent a l'ecran, on utilise des ratios (ratio_x) pour le placement. aisin il seront toujours au même endroit peut importe l'ecran.
         On ajoute aussi le sol sur lequel sera placé le bouton afin d'utiliser le ratio en fonction de la longueur du sol
@@ -46,10 +49,11 @@ public class Bouton extends Rectangle {
         this.on = on;
     }
 
+    public Cube getCube() {
+        return cube;
+    }
 
-    @Override
-    public String toString() {
-        String nom = "Bouton";
-        return "Bouton{" + "nom='" + nom + '\'' + ", on=" + on + ", initialY=" + initialY + ", initialTaille=" + initialTaille + '}';
+    public void setCube(Cube cube) {
+        this.cube = cube;
     }
 }
