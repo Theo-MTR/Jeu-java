@@ -41,7 +41,7 @@ public class NiveauUn {
         Mur sol9= new Mur(0.19,0.91,0.01,0.01);
         Mur sol10= new Mur(0.73,0.57,0.04,0.3);
         Mur sol12= new Mur(0.73,0.60,0.2,0.02);
-        Mur sol13= new Mur(0.21,0.25,0.04,0.22);
+        Mur sol13= new Mur(0.21,0.27,0.04,0.22);
         Mur sol14= new Mur(0.55,0.43,0.03,0.03);
         Mur sol15= new Mur(0.15,0.03,0.03,0.16);
         Mur sol16= new Mur(0.84,0.37,0.03,0.2);
@@ -55,7 +55,7 @@ public class NiveauUn {
         //Creation des boutons
         Bouton b1= new Bouton(0.68,sol1);
         Bouton b2= new Bouton(0.17, sol10);
-        Bouton b3= new Bouton(0.60,sol13);
+        Bouton b3= new Bouton(0.80,sol13);
 
         //Creation des murs movibles
         MurMovible mv1= new MurMovible(0.73,0.2,0.2,0.02,sol1,b1,Color.BLACK,"v");
@@ -66,7 +66,7 @@ public class NiveauUn {
         Scie s1= new Scie(0.50,50,sol9);
 
         //Creation des lasers
-        Laser l1= new Laser(0.4,-0.04,0.40,sol10,100,b1);
+        Laser l1= new Laser(0.4,-0.04,0.38,sol10,100,b1);
         Laser l2= new Laser(0.65,0.18,0.20,sol10,50,b2);
 
         //Creation des cubes

@@ -14,8 +14,8 @@ import jeu.objets.*;
 
 public class Collision {
 
-    static AnimationTimer timer;
-    static AnimationTimer timer2;
+    private static AnimationTimer timer;
+    private static AnimationTimer timer2;
 
     public static void CheckCollision() {
         //Collision personnage
@@ -29,19 +29,17 @@ public class Collision {
                         if (!(s instanceof Cube)) {
                             Var.personnage.setCollisionAvec(s); //Enregistrer objet en collision avec le personnage (utile pour la gestion de la gravité par exemple qui permet de reactiver la gravité lorsqu'on quitte une plateforme à la marche)
                         }
-                        if (s instanceof Bouton && !((Bouton) s).isOn())
+                        if (s instanceof Mur || s instanceof MurMovible)
+                            ActionPersoMur(s); //Action lorsqu'on entre en collision avec un mur
+                        else if (s instanceof Scie || s instanceof Laser || s instanceof Pique)
+                            actionPiege(s); //Action quand on rentre en collision avec une scie
+                        else if (s instanceof Bouton && !((Bouton) s).isOn())
                             ActionPersonBouton((Bouton) s); //Activer animation bouton lorsqu'il y a collision avec un bouton
                             //else if (s instanceof Cube && !Var.toucheT); // ActionPersoCube();
                         else if (s instanceof MurBlanc)
                             ActionPersoMurBlanc((MurBlanc) s); //Action realisé lorsque le personnage entre en collision avec un portail
                         else if (s instanceof Cube && Touche.isToucheT() && Var.personnage.getCubeSelect() == null)
                             Var.personnage.setCubeSelect((Cube) s); //Enregistrer le cube entrain d'être porté
-
-                        else if (s instanceof Mur || s instanceof MurMovible)
-                            ActionPersoMur(s); //Action lorsqu'on entre en collision avec un mur
-                        else if (s instanceof Scie || s instanceof Laser)
-                            actionPiege(); //Action quand on rentre en collision avec une scie
-                        else if (s instanceof Pique) actionPique(); //Action quand on rentre en collision avec un pique
                         else if (s instanceof Porte) {
                             niveauSuivant(((Porte) s));
                             break;
@@ -117,6 +115,7 @@ public class Collision {
             Var.personnage.setEnGravite(false); //On arrete donc la gravité car on ne veux pas que le perso traverse le mur
             Var.personnage.setY(s.getBoundsInParent().getMinY() - Var.personnage.getHeight()); //On replace correctement le personnage sur son sol
         }
+        Touche.setToucheSaut(false);
     }
 
     //Action quand le perso entre en collision avec un bouton
@@ -187,11 +186,16 @@ public class Collision {
     private static void niveauSuivant(Porte p) {
         if (Var.personnage.getX() > p.getX()) { //On fait en sorte que ça s'execute lorsque le perso est bien derriere la porte
             switch (p.getNiveau()) { //On verifie quel niveau est terminé par la porte
+                case 0: //niveau d'intro
+                    Var.n0 = true;
+                    break;
                 case 1: //si c'est le 1...
                     Var.n1 = true; //On met n1 a true pour indiquer que le niveau 1 est terminé
                     break;
                 case 2:
                     Var.n2 = true;
+                    break;
+                default:
                     break;
             }
             Main.demarrer(); //On réexecute la fonction démarrer du fichier main
@@ -199,28 +203,22 @@ public class Collision {
     }
 
     //Methode executer lors de la collision avec un piège
-    private static void actionPiege() {
-        if (Touche.isToucheQ()) { //Si la touche q est utilisé, donc si le perso arrive de la droite et va vers la gauche
-            Var.personnage.setX(Var.personnage.getX() + Var.personnage.getWidth() + (Var.scene.getWidth() * 0.005)); //On replace le perso légérement à droite du piège
-        } else if (Touche.isToucheD()) {//Si la touche q est utilisé, donc si le perso arrive de la gauche et va vers la droite
-            Var.personnage.setX(Var.personnage.getX() - (Var.scene.getWidth() * 0.005));//On replace le perso légérement à droite du piège
+    private static void actionPiege(Shape s) {
+        if (s instanceof Pique) { //Si c'est un pique...
+            if (Var.personnage.getX() + (Var.personnage.getWidth() / 2) >= ((Pique) Var.personnage.getCollisionAvec()).getX() + (((Pique) Var.personnage.getCollisionAvec()).getWidth() / 2)) { //Si le perso est avant la moitié du piége
+                Var.personnage.setX(((Pique) Var.personnage.getCollisionAvec()).getX() + ((Pique) Var.personnage.getCollisionAvec()).getWidth() + 1); //On replace le perso légérement à droite du piège
+            } else {//Si la touche q est utilisé, donc si le perso arrive de la gauche et va vers la droite
+                Var.personnage.setX(((Pique) Var.personnage.getCollisionAvec()).getX() - Var.personnage.getWidth() - 1);//On replace le perso légérement à gauche du piège
+            }
         }
-        if (Var.personnage.getCollisionAvec() instanceof Scie)
-            Var.personnage.setVie(Var.personnage.getVie() - ((Scie) Var.personnage.getCollisionAvec()).getVie()); //On reconfigure la vie du personnage en lui enlevant celle que le piege retire
-        else Var.personnage.setVie(Var.personnage.getVie() - ((Laser) Var.personnage.getCollisionAvec()).getVie());
-        Vie.MajVie(); //Tous les réglages necessaires quand on subit des degats
-    }
-
-
-    //Methode executé lors de la collision avec un pique
-    private static void actionPique() {
-        if (Var.personnage.getX() + (Var.personnage.getWidth() / 2) >= ((Pique) Var.personnage.getCollisionAvec()).getX() + (((Pique) Var.personnage.getCollisionAvec()).getWidth() / 2)) { //Si la touche q est utilisé, donc si le perso arrive de la droite et va vers la gauche
-            Var.personnage.setX(((Pique) Var.personnage.getCollisionAvec()).getX() + ((Pique) Var.personnage.getCollisionAvec()).getWidth() + 1); //On replace le perso légérement à droite du piège
-        } else {//Si la touche q est utilisé, donc si le perso arrive de la gauche et va vers la droite
-            Var.personnage.setX(((Pique) Var.personnage.getCollisionAvec()).getX() - Var.personnage.getWidth() - 1);//On replace le perso légérement à gauche du piège
+        else {
+            if (Touche.isToucheQ()) { //Si la touche q est utilisé, donc si le perso arrive de la droite et va vers la gauche
+                Var.personnage.setX(Var.personnage.getX() + Var.personnage.getWidth() + (Var.scene.getWidth() * 0.005)); //On replace le perso légérement à droite du piège
+            } else if (Touche.isToucheD()) {//Si la touche q est utilisé, donc si le perso arrive de la gauche et va vers la droite
+                Var.personnage.setX(Var.personnage.getX() - (Var.scene.getWidth() * 0.005));//On replace le perso légérement à droite du piège
+            }
         }
-        Var.personnage.setVie(Var.personnage.getVie() - ((Pique) Var.personnage.getCollisionAvec()).getVie()); //On reconfigure la vie du personnage en lui enlevant celle que le piege retire
-        Vie.MajVie(); //Tous les réglages necessaires quand on subit des degats
+        Vie.retraitVie();
     }
 
     //Changer la couleur du label de vie lorqu'on est en dessous d'un certains seuil

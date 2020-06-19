@@ -25,7 +25,7 @@ public class Bouton extends Rectangle {
         super(); //Appel du constructeur de la classe Rectangle
         on = false;
         setWidth(Var.scene.getWidth() * 0.026); //Taille fixe du bouton
-        setHeight(Var.scene.getHeight() * 0.019);
+        setHeight(Var.scene.getHeight() * 0.020);
         setX(sol.getBoundsInLocal().getMinX() + sol.getBoundsInLocal().getWidth() * ratio_x); //Position x du bouton en fonction du sol sur lequel on le place
         setY(sol.getBoundsInLocal().getMinY() - Var.scene.getHeight() * 0.019); //Position Y du bouton en fonction du sol (qui correspond a la hauteur du bouton)
         setFill(Color.RED); // Couleur initial

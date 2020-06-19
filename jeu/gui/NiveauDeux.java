@@ -13,8 +13,6 @@ public class NiveauDeux {
 
         /*
 
-        /!\ NE PAS OUBLIER D'AJOUTER CHAQUE OBJET CREE A LA FIN DU FICHIER /!\
-
         CReation mur : Mur NOM_MUR = new Mur(Ratio x, Ratio y, Ratio hauteur, Ratio Largeur);
         Creation Bouton : Bouton NOM_BOUTON = new Bouton(Ratio X, Sol sur lequel on le place);
         Creation mur movible : MurMovible NOM_MUR = new MurMovible(Ratio x, Ratio y, Ratio hauteur, Ratio Largeur, sol sur lequel il est placé, bouton qui l'active, couleur, orientation); !!!! Pour la couleur utiliser Color.LACOULEURE (ex Color.BLACK)

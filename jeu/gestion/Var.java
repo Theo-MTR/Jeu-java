@@ -3,7 +3,6 @@ package jeu.gestion;
 
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 import jeu.objets.Cube;
@@ -20,6 +19,7 @@ public class Var {
     protected static Personnage personnage;
 
     public static boolean demmare = false;
+    public static boolean n0 = false;
     public static boolean n1 = false;
     public static boolean n2 = false;
     //protected static boolean n3 = false;
@@ -33,7 +33,6 @@ public class Var {
 
     public static void init() {
         personnage = null;
-        demmare = false;
         murEntree = null;
         murSortie = null;
         obstacles = new Vector<>();

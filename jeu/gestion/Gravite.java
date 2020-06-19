@@ -1,3 +1,8 @@
+/*
+Classe qui gère la gravité tout en se basant sur ce qu'il y a sur terre, le personnage va chuter d'une certaines valeurs qui elle même augmentera a chaque chute
+par la force de gravité du jeu
+ */
+
 package jeu.gestion;
 
 import javafx.animation.AnimationTimer;
@@ -5,7 +10,7 @@ import jeu.objets.Bouton;
 
 public class Gravite {
 
-    private static double GRAVITE = 0.0019; //Constante de gravité (pour faire comme sur terre)
+    private static final double GRAVITE = 0.0019; //Constante de gravité (pour faire comme sur terre)
     private static double vitesseG = 0; //Acceleration en cours
     private static double vitesseGCube = 0; //Acceleration en cour (pour le cube)
     private static AnimationTimer timer; //Timer déclaré ici afin de pouvoir l'arréter via une autre méthode
@@ -27,7 +32,9 @@ public class Gravite {
                 //Valeur X minimum de l'objet en collision : son point x puisqu'il se trouve à gauche.
                 //Valeur X maximum de l'objet en collision : son point x + sa longueur.
                 if ((Var.personnage.getCollisionAvec() != null) && (Var.personnage.getX() + Var.personnage.getWidth() < Var.personnage.getCollisionAvec().getBoundsInLocal().getMinX() || Var.personnage.getX() > Var.personnage.getCollisionAvec().getBoundsInLocal().getMaxX()) && Var.personnage.getY() <= Var.personnage.getCollisionAvec().getBoundsInLocal().getMinY()) {
+                    System.out.println("ok");
                     if (Var.personnage.getCollisionAvec() instanceof Bouton && Var.personnage.getY() + Var.personnage.getHeight() <= Var.personnage.getCollisionAvec().getBoundsInLocal().getMinY()) { //Si l'objet en collision est un bouton...
+                        System.out.println("ok bouton");
                         ((Bouton) Var.personnage.getCollisionAvec()).setOn(false); //On desactive le bouton, puisqu'on veut que ça soit le cas quand on le quitte
                         Animation.animBouton((Bouton)Var.personnage.getCollisionAvec()); //On lance "l'animation" du bouton
                     }

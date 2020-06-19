@@ -8,7 +8,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import jeu.gestion.Var;
 import jeu.gestion.*;
 
 public class Main extends Application {
@@ -41,10 +40,21 @@ public class Main extends Application {
             Var.stage.setScene(Var.scene);
             new Acceuil();
         } else {
-            if (!Var.n1) {
+            if (!Var.n0) {
                 Var.root.getChildren().removeAll(Var.root.getChildren());
+                new NiveauIntro();
+            } else if (!Var.n1) {
+                Var.root.getChildren().removeAll(Var.root.getChildren());
+                GPopup.stopTimer();
+                Var.init();
+                Touche.stopTimer();
+                Vie.stopTimer();
+                Collision.stopTimer();
+                Gravite.stopTimer();
+                GestionPiege.stopTimer();
                 new NiveauUn();
-            } else if (!Var.n2) {
+            }
+            else if (!Var.n2) {
                 Var.root.getChildren().removeAll(Var.root.getChildren());
                 Var.init();
                 Touche.stopTimer();
@@ -57,7 +67,7 @@ public class Main extends Application {
             Vie.configVie();
             Gravite.gestGravite();
             Collision.CheckCollision();
-            new GestionPiege();
+            GestionPiege.GPiege();
             Touche.etatTouche();
             Touche.ActionTouche();
 

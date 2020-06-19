@@ -15,7 +15,7 @@ public class GestionPiege {
     private static final int VITESSE_CHUTE_MUR = 3; //Constante pour la vitesse d'ouverture et de fermeture d'un mur movible
     private static AnimationTimer timer; //Timer. On l'a déclaré dans une variable comme ça on peut l'arreter grace a une methode. Ca nous permet de pouvoir changer de niveau sans bug
 
-    public GestionPiege() {
+    public static void GPiege() {
         timer = new AnimationTimer() {
             @Override
             public void handle(long l) {
